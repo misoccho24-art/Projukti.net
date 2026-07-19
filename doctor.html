@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমাদের ডাক্তারগণ | প্রযুক্তি হাসপাতাল ও ডায়াগনস্টিক সেন্টার</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body class="body">
+
+    <nav class="nav">
+        <a href="index.html" class="brand">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.4"/>
+                    <path d="M6 21h6l2.4-6.5L18 27l3-13 2.4 7H34" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>
+                <span class="brand-name">প্রযুক্তি হাসপাতাল</span>
+                <span class="brand-tag">প্রযুক্তি হাসপাতাল ও ডায়াগনস্টিক সেন্টার</span>
+            </span>
+        </a>
+
+        <div class="nav-links-desktop">
+            <a href="index.html">Home</a>
+            <a href="doctor.html" class="active">Our Doctors</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <a class="nav-call" href="tel:01725900093">সিরিয়াল করুন</a>
+
+        <div class="sidebar-toggle" id="sidebarToggle">☰</div>
+    </nav>
+
+    <nav class="nav-list" id="sidebar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="doctor.html" class="active">Our Doctors</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </nav>
+    <div class="overlay" id="overlay"></div>
+
+    <div class="content">
+
+            <div class="section-head">
+                <span class="section-eyebrow">Meet your doctors</span>
+                <h2>আমাদের বিশেষজ্ঞ ডাক্তারগণ</h2>
+            </div>
+
+            <div class="doctors-list">
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">র</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>সহকারী অধ্যাপক ডাঃ মোঃ রবিউল ইসলাম রনি</h2>
+                        <p class="doctor-role">নাক, কান, গলারোগ বিশেষজ্ঞ ও হেড নেক সার্জন</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, ডি.এল.ও (ইএনটি)</li>
+                            <li>বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয় এন্ড পিজি</li>
+                            <li class="strong">সহকারী অধ্যাপক</li>
+                            <li>কুমুদীনি উইমেন্স মেডিকেল কলেজ ও হাসপাতাল এন্ড সহকারী অধ্যাপক</li>
+                            <li>খাজা ইউনুস আলী মেডিকেল কলেজ ও হাসপাতাল</li>
+                            <li class="reg">বিএমডিসি রেজিঃ এ- ৬৭৬৪৬</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতি সোমবার বিকাল ৪ টা থেকে... এবং প্রতি বুধবার থেকে শুক্রবার পর্যন্ত দুপুর ২ টা থেকে...</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">তো</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোঃ তোফাজ্জল হোসেন</h2>
+                        <p class="doctor-role">চর্ম ও যৌনরোগ বিশেষজ্ঞ, লেজার কসমেটিক ডার্মাটোসার্জন</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস (এমএমসি), ডিডিভি (চর্ম ও যৌন)</li>
+                            <li>বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয় এন্ড পিজি এন্ড বহিঃ বিভাগ প্রধান</li>
+                            <li>জলছত্র হাসপাতাল, মধুপুর, টাঙ্গাইল</li>
+                            <li class="strong">কনসালটেন্ট, ডার্মাটোলজিস্ট, দি লেজার স্কিন কেয়ার</li>
+                            <li>এপেক্স হাসপাতাল, ব্রহ্মপল্লী রোড, ময়মনসিংহ</li>
+                            <li class="reg">বিএমডিসি রেজিঃ নং - এ ৩৩৪৯৩</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতি রবিবার বিকাল ৩ টা থেকে... এবং প্রতি বুধবার সকাল ১১টা থেকে বিকাল ৪ টা পর্যন্ত।</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">যা</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ যায়িদ মোঃ আদনান শামীম</h2>
+                        <p class="doctor-role">মেডিসিন বিশেষজ্ঞ</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, বিসিএস (স্বাস্থ্য)</li>
+                            <li>এমসিপিএস (মেডিসিন)</li>
+                            <li>এফসিপিএস (মেডিসিন), এফপি</li>
+                            <li>এমআরসিপি (PACES)</li>
+                            <li class="strong">মেডিসিন বিভাগ</li>
+                            <li>ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতিদিন বিকাল ৩ টা থেকে... (বৃহস্পতিবার বন্ধ)</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">ম</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোঃ মনিরুজ্জামান মনির</h2>
+                        <p class="doctor-role">হাড়-জোড়া, বাত ব্যথা, মেরুদণ্ড ও পঙ্গুরোগ বিশেষজ্ঞ ও ট্রমা সার্জন</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, বিসিএস (স্বাস্থ্য)</li>
+                            <li>ডি-অর্থো (অর্থোপেডিক্স সার্জারী)</li>
+                            <li>এফসিপিএস (অর্থো সার্জারী), এফপি</li>
+                            <li>জাতীয় অর্থোপেডিক্স হাসপাতাল ও পুনর্বাসন প্রতিষ্ঠান (পঙ্গু হাসপাতাল), ঢাকা</li>
+                            <li>এ ও বেসিক (ইন্দোনেশিয়া) উচ্চতর প্রশিক্ষণপ্রাপ্ত, ইলিজারভ ডিফরমেটি কারেকশন (ইন্ডিয়া)</li>
+                            <li class="strong">জামালপুর মেডিকেল কলেজ ও হাসপাতাল</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতি রবিবার বিকাল ৫ টা থেকে... এবং প্রতি শুক্রবার সকাল ১১ টা থেকে...</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">মো</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোশতাক আহমেদ মোড়ল</h2>
+                        <p class="doctor-role">মেডিসিন, বাত জ্বর, উচ্চরক্তচাপ ও হৃদরোগ বিশেষজ্ঞ</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, বিসিএস (স্বাস্থ্য)</li>
+                            <li>ডি-কার্ড (কার্ডিওলজি)</li>
+                            <li>এফসিপিএস (কার্ডিওলজি), এফপি</li>
+                            <li>সিসিডি (ডায়াবেটিস) বারডেম, এমএসপি (আমেরিকা)</li>
+                            <li class="strong">কনসালটেন্ট</li>
+                            <li>ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতি বৃহস্পতিবার বিকাল ৩ টা থেকে...</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">বি</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোঃ মোফাজ্জল হোসেন বিদুৎ</h2>
+                        <p class="doctor-role">মানসিক ও মনোরোগ বিশেষজ্ঞ</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, বিসিএস (স্বাস্থ্য)</li>
+                            <li>এমসিপিএস (মনোরোগ)</li>
+                            <li>এফসিপিএস (মনোরোগ), এফপি</li>
+                            <li>এমডি (সাইকিয়াট্রিক) রেসিডেন্ট</li>
+                            <li class="strong">মানসিক ও মনোরোগ বিভাগ</li>
+                            <li>শেরপুর সদর হাসপাতাল</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ শুক্রবার সকাল ১১ টা থেকে বিকাল ৪ টা পর্যন্ত।</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">আ</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোঃ মাঈন উদ্দিন আকন্দ</h2>
+                        <p class="doctor-role">হাড়-জোড়া, বাত ব্যথা, মেরুদণ্ড ও পঙ্গুরোগ বিশেষজ্ঞ ও ট্রমা সার্জন</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, বিসিএস (স্বাস্থ্য)</li>
+                            <li>ডি-অর্থো (অর্থোপেডিক্স সার্জারী)</li>
+                            <li>বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয়</li>
+                            <li class="strong">অর্থোপেডিক্স বিশেষজ্ঞ ও ট্রমা সার্জন</li>
+                            <li>২৫০ শয্যা জেনারেল হাসপাতাল, জামালপুর</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতি মঙ্গলবার বিকাল ৪ টা থেকে...</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">ম</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোঃ মাজেদুর রহমান মাজেদ</h2>
+                        <p class="doctor-role">ইউরোলজি এন্ড এন্ড্রোলজি বিশেষজ্ঞ ও সার্জন</p>
+                        <ul class="doctor-detail-list">
+                            <li>কিডনি, মূত্রনালি, মূত্রথলি, অন্ডকোষ, পুরুষাঙ্গরোগ ও যৌনরোগ বিশেষজ্ঞ</li>
+                            <li>এমবিবিএস, বিসিএস (স্বাস্থ্য)</li>
+                            <li>এমএস (ইউরোলজি এন্ড এন্ড্রোলজি)</li>
+                            <li>এফসিপিএস, এফপি (সার্জারী)</li>
+                            <li class="strong">ইউরোলজি এন্ড এন্ড্রোলজি বিভাগ</li>
+                            <li>ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</li>
+                            <li class="reg">বিএমডিসি রেজিঃ নং - এ- ৭৩৯২০</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতি বৃহস্পতিবার বিকাল ৩ টা থেকে...</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">তু</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোঃ আকলেছুর রহমান খান তুহিন</h2>
+                        <p class="doctor-role">সার্জারী বিশেষজ্ঞ ও জেনারেল সার্জন</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, বিসিএস (স্বাস্থ্য)</li>
+                            <li>এম.এস (জেনারেল সার্জারী)</li>
+                            <li class="strong">সার্জারী বিভাগ</li>
+                            <li>ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতিদিন বিকাল ৩ টা থেকে...</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">রা</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোঃ রাজন খান</h2>
+                        <p class="doctor-role">নিউরোমেডিসিন (স্নায়ুরোগ), মাথা, মেরুদণ্ড ও মেডিসিন বিশেষজ্ঞ</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, সিসিডি (ডায়াবেটিস) বারডেম</li>
+                            <li>এম.ডি (নিউরোলজি) রেসিডেন্ট</li>
+                            <li class="strong">এফসিপিএস, এফপি (মেডিসিন)</li>
+                            <li>ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতি সোমবার বিকাল ৩ টা... এবং প্রতি শুক্রবার সকাল ১১ টা থেকে সন্ধ্যা ৭ টা পর্যন্ত।</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">ফ</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ মোঃ ফয়েজ আহমেদ</h2>
+                        <p class="doctor-role">নিউরোলজি ও মেডিসিন বিশেষজ্ঞ</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস, বিসিএস (স্বাস্থ্য)</li>
+                            <li>এম.ডি (নিউরোলজি)</li>
+                            <li>এফসিপিএস, এফপি (মেডিসিন)</li>
+                            <li>সিসিডি (ডায়াবেটিস) বারডেম</li>
+                            <li class="strong">রেজিস্ট্রার (নিউরোলজি)</li>
+                            <li>ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতি শুক্রবার বিকাল ৩ টা থেকে...</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-photo">
+                        <span class="doctor-monogram">সি</span>
+                    </div>
+                    <div class="doctor-info">
+                        <h2>ডাঃ সিরাজুন নাহার রাবেয়া</h2>
+                        <p class="doctor-role">গাইনী ও প্রসূতি বিশেষজ্ঞ ও সার্জন</p>
+                        <ul class="doctor-detail-list">
+                            <li>এমবিবিএস (ঢাকা)</li>
+                            <li>ডিজিও (গাইনি এন্ড অবস)</li>
+                            <li class="strong">এফসিপিএস, এফপি (গাইনি ও প্রসূতি)</li>
+                            <li>বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয় এন্ড পিজি হাসপাতাল</li>
+                        </ul>
+                        <p class="doctor-visit">রোগী দেখার সময়ঃ প্রতিদিন বিকাল ৩ টা থেকে...</p>
+                        <div class="doctor-phones">
+                            <span class="phones-label">আজই সিরিয়াল নিন —</span>
+                            <a href="tel:01725900093">01725-900093</a>
+                            <a href="tel:01896197260">01896-197260</a>
+                            <a href="tel:01707670771">01707-670771</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        <footer class="footer">
+            <div class="supreme">
+                <div class="footer-brand">
+                    <span class="brand-mark" aria-hidden="true">
+                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.4"/><path d="M6 21h6l2.4-6.5L18 27l3-13 2.4 7H34" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    <p>শেরপুরের বিশ্বস্ত আল্ট্রাসাউন্ড ও ডায়াগনস্টিক সেন্টার — নির্ভুল যত্ন, সরাসরি তত্ত্বাবধানে।</p>
+                </div>
+
+                <div class="div-li-z">
+                    <p class="z-p">Quick Links</p>
+                    <a href="index.html"><li class="li-z">Home</li></a>
+                    <a href="doctor.html"><li class="li-z">Our Doctors</li></a>
+                    <a href="contact.html"><li class="li-z">Contact</li></a>
+                </div>
+                <div class="div-li-z1">
+                    <p class="z-p">Contact</p>
+                    <li class="li-z">01725-900093</li>
+                    <li class="li-z">01996-997260</li>
+                    <li class="li-z">01707-670771</li>
+                    <li class="li-z">Zilla Hospital Road, Narayanpur, Sherpur</li>
+                </div>
+            </div>
+        </footer>
+
+        <div class="f-div">
+            <p class="f-p">© 2026 | <a href="https://www.facebook.com/profile.php?id=61584839668380">Developed by M I</a></p>
+        </div>
+
+    </div>
+
+    <a class="float-call" href="tel:01725900093">📞 <span>কল করুন</span></a>
+
+    <script>
+        const toggle = document.getElementById("sidebarToggle");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+
+        function closeSidebar() {
+            sidebar.classList.remove("open");
+            overlay.classList.remove("show");
+        }
+
+        if (toggle && sidebar) {
+            toggle.addEventListener("click", () => {
+                sidebar.classList.toggle("open");
+                overlay.classList.toggle("show");
+            });
+            overlay.addEventListener("click", closeSidebar);
+            sidebar.querySelectorAll("a").forEach(a => a.addEventListener("click", closeSidebar));
+        }
+
+        document.querySelectorAll('.service-card, .why-card').forEach(card => {
+            card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
+            card.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
+        });
+    </script>
+</body>
+</html>
