@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Google Reviews Widget</title>
+<style>
+  .reviews-widget {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+  }
+  .review-card {
+    min-width: 280px;
+    max-width: 280px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+  }
+  .review-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .review-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .review-author {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .review-stars {
+    color: #fbbc04;
+    font-size: 14px;
+  }
+  .review-text {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.4;
+    max-height: 100px;
+    overflow-y: auto;
+  }
+  .review-time {
+    font-size: 11px;
+    color: #999;
+    margin-top: 8px;
+  }
+  .overall-rating {
+    font-family: Arial, sans-serif;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+
+<div id="overall-rating" class="overall-rating"></div>
+<div id="reviews-widget" class="reviews-widget">Loading reviews...</div>
+
+<script>
+  // ---- CONFIG: replace these two values ----
+  const PLACE_ID = "ChIJq2_9pc3XVzcRysbS_p9xz_E"; // get from https://developers.google.com/maps/documentation/places/web-service/place-id
+  // API key is loaded via the script tag below, not here.
+  // -------------------------------------------
+
+  function initReviews() {
+    const map = new google.maps.Map(document.createElement("div")); // required dummy map instance
+    const service = new google.maps.places.PlacesService(map);
+
+    service.getDetails(
+      {
+        placeId: PLACE_ID,
+        fields: ["name", "rating", "user_ratings_total", "reviews"]
+      },
+      (place, status) => {
+        const container = document.getElementById("reviews-widget");
+        const ratingEl = document.getElementById("overall-rating");
+
+        if (status !== google.maps.places.PlacesServiceStatus.OK || !place) {
+          container.innerText = "Could not load reviews.";
+          return;
+        }
+
+        ratingEl.innerHTML =
+          `<strong>${place.name}</strong> — ⭐ ${place.rating} (${place.user_ratings_total} reviews on Google)`;
+
+        container.innerHTML = "";
+        (place.reviews || []).forEach(r => {
+          const card = document.createElement("div");
+          card.className = "review-card";
+          card.innerHTML = `
+            <div class="review-header">
+              <img src="${r.profile_photo_url}" alt="${r.author_name}">
+              <div>
+                <div class="review-author">${r.author_name}</div>
+                <div class="review-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+              </div>
+            </div>
+            <div class="review-text">${r.text}</div>
+            <div class="review-time">${r.relative_time_description}</div>
+          `;
+          container.appendChild(card);
+        });
+      }
+    );
+  }
+</script>
+
+<!-- Replace YOUR_API_KEY below. Restrict this key by HTTP referrer in Google Cloud Console
+     to your client's domain so it can't be abused elsewhere. -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0Wn2MB8iLD-9h8LXbgBHslnqjHbsTM1g&libraries=places&callback=initReviews">
+</script>
+
+</body>
+</html>

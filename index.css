@@ -183,6 +183,7 @@ img{max-width:100%;display:block;}
     display:block;font-family:var(--font-util);font-size:0.78rem;
     font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
     color:var(--amber-dark);margin-bottom:10px;
+    margin-top: 50px;
 }
 .section-head h2, .doctor-info h2{
     font-family:var(--font-display);font-weight:700;

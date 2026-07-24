@@ -9,6 +9,96 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Filter sidebar — doctors page only */
+        .doctors-page-layout {
+            display: flex;
+            align-items: flex-start;
+            gap: 28px;
+        }
+
+        .filter-sidebar {
+            flex: 0 0 240px;
+            position: sticky;
+            top: 90px;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+        }
+
+        .filter-sidebar-head {
+            font-family: 'Noto Serif Bengali', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .filter-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .filter-btn {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            font-size: 0.92rem;
+            color: #333;
+            padding: 9px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .filter-btn.active {
+            background: #1f4b3f;
+            color: #fff;
+        }
+
+        .doctors-list {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 0;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            color: #666;
+        }
+
+        @media (max-width: 860px) {
+            .doctors-page-layout {
+                flex-direction: column;
+            }
+            .filter-sidebar {
+                position: static;
+                width: 100%;
+                flex-basis: auto;
+            }
+            .filter-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .filter-btn {
+                width: auto;
+            }
+        }
+    </style>
 </head>
 <body class="body">
 
@@ -51,9 +141,28 @@
                 <h2>আমাদের বিশেষজ্ঞ ডাক্তারগণ</h2>
             </div>
 
-            <div class="doctors-list">
+            <div class="doctors-page-layout">
 
-                <div class="doctor-card">
+                <aside class="filter-sidebar" id="filterSidebar">
+                    <div class="filter-sidebar-head">বিভাগ অনুযায়ী খুঁজুন</div>
+                    <ul class="filter-list" id="filterList">
+                        <li><button class="filter-btn active" data-filter="all">সকল ডাক্তার</button></li>
+                        <li><button class="filter-btn" data-filter="medicine">মেডিসিন বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="cardiology">কার্ডিওলজি বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="orthopedics">অর্থোপেডিক্স বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="ent">নাক-কান-গলা বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="dermatology">চর্ম ও যৌনরোগ বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="psychiatry">মানসিক ও মনোরোগ বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="urology">ইউরোলজি বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="surgery">সার্জারী বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="neurology">নিউরোলজি বিশেষজ্ঞ</button></li>
+                        <li><button class="filter-btn" data-filter="gynecology">গাইনী ও প্রসূতি বিশেষজ্ঞ</button></li>
+                    </ul>
+                </aside>
+
+            <div class="doctors-list" id="doctorsList">
+
+                <div class="doctor-card" data-category="ent">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">র</span>
                     </div>
@@ -78,7 +187,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="dermatology">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">তো</span>
                     </div>
@@ -103,7 +212,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="medicine">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">যা</span>
                     </div>
@@ -128,7 +237,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="orthopedics">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">ম</span>
                     </div>
@@ -153,7 +262,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="cardiology">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">মো</span>
                     </div>
@@ -178,7 +287,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="psychiatry">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">বি</span>
                     </div>
@@ -203,7 +312,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="orthopedics">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">আ</span>
                     </div>
@@ -227,7 +336,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="urology">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">ম</span>
                     </div>
@@ -253,7 +362,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="surgery">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">তু</span>
                     </div>
@@ -276,7 +385,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="neurology">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">রা</span>
                     </div>
@@ -299,7 +408,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="neurology">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">ফ</span>
                     </div>
@@ -324,7 +433,7 @@
                     </div>
                 </div>
 
-                <div class="doctor-card">
+                <div class="doctor-card" data-category="gynecology">
                     <div class="doctor-photo">
                         <span class="doctor-monogram">সি</span>
                     </div>
@@ -346,6 +455,10 @@
                         </div>
                     </div>
                 </div>
+
+                <p class="no-results" id="noResults" style="display:none;">এই বিভাগে কোনো ডাক্তার পাওয়া যায়নি।</p>
+
+            </div>
 
             </div>
 
@@ -405,6 +518,32 @@
             card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
             card.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
         });
+
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const doctorCards = document.querySelectorAll('.doctor-card');
+        const noResults = document.getElementById('noResults');
+
+        if (filterButtons.length) {
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.getAttribute('data-filter');
+                    let visibleCount = 0;
+
+                    doctorCards.forEach(card => {
+                        const match = filter === 'all' || card.getAttribute('data-category') === filter;
+                        card.style.display = match ? '' : 'none';
+                        if (match) visibleCount++;
+                    });
+
+                    if (noResults) {
+                        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>
