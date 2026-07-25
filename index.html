@@ -9,16 +9,226 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&family=Hind+Siliguri:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* ===== Doctor promo card (scoped with dc- prefix, safe alongside index.css) ===== */
+      :root{
+        --dc-deep:    #0A3D28;
+        --dc-deep2:   #062A1B;
+        --dc-leaf:    #157A47;
+        --dc-bright:  #33B36B;
+        --dc-mint:    #DFF3E6;
+        --dc-cream:   #FBF8EE;
+        --dc-line:    rgba(10,61,40,0.16);
+      }
+      .map-band{
+        width: 100%;
+        overflow: hidden;
+        border-radius: 0;
+      }
+      .map-band iframe{
+        width: 100%;
+        min-height: 380px;
+      }
+      .dc-wrap{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        padding: 28px 16px 8px 16px;
+        font-family:'Hind Siliguri', sans-serif;
+        position: relative;
+        z-index: 2;
+      }
+      .dc-card{
+        width: 980px;
+        max-width: 100%;
+        background: var(--dc-cream);
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 50px 90px -35px rgba(6,42,27,0.5), 0 1px 0 rgba(255,255,255,0.7) inset;
+      }
+      .dc-card::before{
+        content:"";
+        position:absolute; inset:0;
+        background-image: radial-gradient(rgba(10,61,40,0.06) 1px, transparent 1px);
+        background-size: 16px 16px;
+        pointer-events:none;
+        z-index: 0;
+      }
+      .dc-topbar{
+        position: relative; z-index: 2;
+        padding: 24px 40px 12px 40px;
+        display:flex;
+        align-items:center;
+        gap: 14px;
+      }
+      .dc-logo-mark{
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        background: linear-gradient(155deg, var(--dc-bright), var(--dc-deep));
+        display:flex; align-items:center; justify-content:center;
+        flex-shrink:0;
+      }
+      .dc-logo-mark svg{ width: 22px; height: 22px; }
+      .dc-brand-block .dc-brand{
+        font-family:'Tiro Bangla', serif;
+        font-size: 26px;
+        color: var(--dc-deep);
+        line-height:1;
+      }
+      .dc-brand-block .dc-tagline{
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--dc-leaf);
+        margin-top: 3px;
+      }
+      /* ---- Green panel: edge is a thin decorative strip, content flows naturally below it (fixes responsiveness) ---- */
+      .dc-panel{
+        position: relative;
+        z-index: 1;
+        margin-top: 8px;
+        border-radius: 14px 14px 0 0;
+        background: linear-gradient(160deg, #188A50 0%, var(--dc-deep) 52%, var(--dc-deep2) 100%);
+        overflow: hidden;
+      }
+      .dc-panel::after{
+        content:"";
+        position:absolute; inset:0;
+        background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 4px);
+        mix-blend-mode: overlay;
+        pointer-events:none;
+      }
+
+      .dc-panel-content{
+        position: relative; z-index: 2;
+        display:grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        grid-template-areas: "text medal";
+        align-items:center;
+        gap: clamp(18px, 4vw, 34px);
+        padding: clamp(26px, 4vw, 40px) clamp(20px, 5vw, 44px) clamp(30px, 5vw, 42px);
+        color: var(--dc-cream);
+      }
+      .dc-panel-left{ grid-area: text; min-width: 0; }
+      .dc-medallion-col{ grid-area: medal; position: relative; display:flex; justify-content:center; }
+
+      .dc-panel .dc-headline{
+        font-family: 'Tiro Bangla', serif;
+        font-size: clamp(21px, 3.4vw, 36px);
+        line-height: 1.36;
+        margin: 0 0 clamp(8px, 1.6vw, 14px) 0;
+        color: #A9EFC4;
+      }
+      .dc-panel .dc-headline em{ font-style: normal; color: #fff; }
+      .dc-subline{
+        font-size: clamp(13.5px, 1.7vw, 17px);
+        font-weight: 500; color: #C9EFD8;
+        margin: 0 0 clamp(12px, 2vw, 18px) 0;
+      }
+      .dc-pill{
+        display:inline-flex; align-items:center; gap: 8px; flex-wrap: wrap;
+        font-size: clamp(12px, 1.5vw, 15px); font-weight: 600;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 8px clamp(12px, 2vw, 18px);
+        border-radius: 999px;
+        margin-bottom: clamp(16px, 3vw, 26px);
+        max-width: 100%;
+      }
+      .dc-pill svg{ width:16px; height:16px; flex-shrink:0; }
+      .dc-services{ display:flex; gap: clamp(14px, 3vw, 30px); flex-wrap: wrap; }
+      .dc-service{ display:flex; flex-direction:column; align-items:center; gap: 6px; }
+      .dc-service .dc-ring{
+        width: clamp(40px, 8vw, 52px); height: clamp(40px, 8vw, 52px); border-radius: 50%;
+        background: rgba(255,255,255,0.09);
+        border: 1px solid rgba(255,255,255,0.32);
+        display:flex; align-items:center; justify-content:center;
+      }
+      .dc-service svg{ width: clamp(18px, 3.6vw, 24px); height: clamp(18px, 3.6vw, 24px); }
+      .dc-service span{ font-size: 11px; font-weight: 600; color: #DFF5E6; }
+
+      .dc-medallion{
+        width: clamp(120px, 24vw, 210px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: linear-gradient(160deg,#EFF8F1,#DCEEE1);
+        border: 5px solid var(--dc-cream);
+        box-shadow: 0 0 0 3px var(--dc-bright), 0 18px 36px -14px rgba(0,0,0,0.5);
+        overflow: hidden; position: relative; z-index: 4;
+      }
+      .dc-medallion img{
+        width:100%; height:100%;
+        object-fit: cover;
+        object-position: center 12%;
+        display:block;
+      }
+      @media (max-width: 640px){
+        .dc-panel-content{
+          grid-template-columns: 1fr;
+          grid-template-areas: "medal" "text";
+          text-align: center;
+        }
+        .dc-panel-left{ display:flex; flex-direction:column; align-items:center; }
+        .dc-pill{ justify-content:center; }
+        .dc-services{ justify-content:center; }
+        .dc-medallion-col{ margin-top: clamp(16px, 4vw, 26px); }
+      }
+      .dc-bottom{
+        position: relative; z-index: 2;
+        padding: 10px 44px 34px 44px;
+        display:grid; grid-template-columns: 1.25fr 0.75fr; gap: 26px;
+      }
+      .dc-name-block{ text-align: center; margin-top: -6px; }
+      .dc-name-block .dc-name{ font-family:'Tiro Bangla', serif; font-size: 22px; color: var(--dc-deep); margin: 0; }
+      .dc-name-block .dc-desig{ font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; color: var(--dc-bright); text-transform: uppercase; margin-top: 2px; }
+      .dc-cred-col{ padding-top: 30px; }
+      .dc-credentials{ font-size: 14px; line-height: 2; color: #274436; }
+      .dc-credentials li{ list-style: none; display:flex; align-items:flex-start; gap: 8px; }
+      .dc-credentials ul{ margin:0; padding:0; }
+      .dc-credentials .dc-leaf-dot{ width: 6px; height:6px; border-radius: 50%; background: var(--dc-bright); margin-top: 9px; flex-shrink:0; }
+      .dc-credentials .dc-strong{ font-weight:700; color: var(--dc-deep); }
+      .dc-divider-row{ height:1px; background: var(--dc-line); margin: 14px 0; }
+      .dc-schedule{ display:flex; align-items:center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--dc-deep); }
+      .dc-schedule svg{ width:20px; height:20px; color: var(--dc-bright); }
+      .dc-contact-col{ padding-top: 30px; display:flex; flex-direction:column; gap: 14px; }
+      .dc-contact-row{ display:flex; align-items:center; gap: 12px; text-decoration:none; }
+      .dc-contact-row.dc-tel{ cursor:pointer; }
+      .dc-contact-row.dc-tel:hover .dc-contact-icon{ background: var(--dc-bright); }
+      .dc-contact-row.dc-tel:hover .dc-contact-icon svg{ color:#fff; }
+      .dc-contact-row.dc-tel:hover .dc-phone{ color: var(--dc-bright); }
+      .dc-contact-icon{
+        width: 38px; height: 38px; border-radius: 50%;
+        background: var(--dc-mint);
+        display:flex; align-items:center; justify-content:center; flex-shrink: 0;
+        transition: background 0.15s ease;
+      }
+      .dc-contact-icon svg{ width:18px; height:18px; color: var(--dc-deep); transition: color 0.15s ease; }
+      .dc-contact-row .dc-phone{
+        font-family:'Space Grotesk', sans-serif; font-size: 21px; font-weight: 700;
+        color: var(--dc-deep); letter-spacing: 0.01em; transition: color 0.15s ease;
+      }
+      .dc-contact-row .dc-txt{ font-size: 14px; font-weight: 600; color: #274436; }
+      .dc-foot-strip{
+        position: relative; z-index: 2;
+        border-top: 1px dashed var(--dc-line);
+        padding: 14px 44px;
+        display:flex; justify-content: space-between;
+        font-size: 11px; color: #5C7A6B; font-weight: 500; letter-spacing: 0.02em;
+      }
+      @media (max-width: 760px){
+        .dc-bottom{ grid-template-columns: 1fr; }
+        .dc-cred-col, .dc-contact-col{ padding-top: 10px; }
+        .dc-foot-strip{ flex-direction:column; gap:4px; }
+      }
+    </style>
 </head>
 <body class="body">
 
     <nav class="nav">
         <a href="index.html" class="brand">
             <span class="brand-mark" aria-hidden="true">
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.4"/>
-                    <path d="M6 21h6l2.4-6.5L18 27l3-13 2.4 7H34" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <img src="favicon.png" alt="">
             </span>
             <span>
                 <span class="brand-name">প্রযুক্তি হাসপাতাল</span>
@@ -65,7 +275,11 @@
                     <a class="btn-ghost" href="#schedule">সেবাসমূহ দেখুন</a>
                 </div>
             </div>
-        </section>
+
+            <!-- Doctor promo card -->
+            <div class="dc-wrap">
+                <div class="dc-card">
+            </section>
 
         <!-- TRUST STATS -->
         <section class="stats-band">
@@ -89,23 +303,7 @@
             </div>
         </section>
 
-        <!-- QUALIFICATIONS -->
-        <section class="section quals">
-            <div class="qual-grid">
-                <div class="qual-item">
-                    <span class="qual-dot"></span>
-                    <p>এমবিবিএস</p>
-                </div>
-                <div class="qual-item">
-                    <span class="qual-dot"></span>
-                    <p>ডিপ্লোমা ইন মেডিকেল আল্ট্রাসাউন্ড</p>
-                </div>
-                <div class="qual-item">
-                    <span class="qual-dot"></span>
-                    <p>ট্রেইন্ড ইন কালার ডপলার</p>
-                </div>
-            </div>
-        </section>
+        <!-- QUALIFICATIONS --
 
         <!-- WHY CHOOSE US -->
         <section class="section why">
@@ -243,6 +441,20 @@
             <h2>আজই সিরিয়াল নিশ্চিত করুন</h2>
             <p>সরাসরি ডাক্তারের তত্ত্বাবধানে নির্ভুল আল্ট্রাসোনোগ্রাফি সেবার জন্য এখনই কল করুন।</p>
             <a class="btn-primary" href="tel:01725900093"> 01725-900093</a>
+        </section>
+
+        <!-- MAP -->
+        <section class="map-band">
+            <iframe
+                title="Google Maps Location"
+                src="https://maps.google.com/maps?q=Zilla%20Hospital%20Road%2C%20Narayanpur%2C%20Sherpur&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="380"
+                style="border:0; display:block;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </section>
 
         <footer class="footer">

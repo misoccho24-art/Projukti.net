@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Doctor Business Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:      #0E241D;
+    --pine-deep: #081712;
+    --bone:      #EDE7D9;
+    --brass:     #B8934B;
+    --brass-lt:  #D9BC7C;
+    --sage:      #4C6B5D;
+    --card-w:    3.5in;
+    --card-h:    2in;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background: #1A1A17;
+    background-image:
+      radial-gradient(ellipse at 20% -10%, rgba(184,147,75,0.08), transparent 55%),
+      radial-gradient(ellipse at 80% 110%, rgba(76,107,93,0.10), transparent 55%);
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--bone);
+    min-height: 100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 48px 20px;
+  }
+
+  .stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:34px;
+  }
+
+  .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color: var(--brass-lt);
+    opacity:0.75;
+  }
+
+  .cards{
+    display:flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content:center;
+  }
+
+  .card{
+    width: 3.85in;
+    height: 2.2in;
+    border-radius: 10px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.04) inset,
+      0 30px 60px -20px rgba(0,0,0,0.65),
+      0 8px 20px -8px rgba(0,0,0,0.5);
+  }
+
+  /* ---------- FRONT ---------- */
+  .front{
+    background:
+      linear-gradient(155deg, var(--pine) 0%, var(--pine-deep) 100%);
+  }
+
+  .front::before{
+    /* faint brushed-foil texture */
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(
+      100deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode: overlay;
+  }
+
+  .front::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:10px;
+    border: 1px solid rgba(184,147,75,0.35);
+    pointer-events:none;
+  }
+
+  .front-inner{
+    position:relative;
+    z-index:2;
+    height:100%;
+    padding: 0.26in 0.32in;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.32em;
+    text-transform:uppercase;
+    color: var(--brass-lt);
+    opacity: 0.85;
+    margin: 0 0 10px 0;
+  }
+
+  .name{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight: 400;
+    font-size: 30px;
+    line-height:1.05;
+    color: var(--bone);
+    margin:0;
+    letter-spacing: 0.005em;
+  }
+
+  .credentials{
+    font-family:'Fraunces', serif;
+    font-weight:300;
+    font-style:italic;
+    font-size: 15px;
+    color: var(--brass-lt);
+    margin: 2px 0 0 0;
+  }
+
+  .pulse-wrap{
+    margin: 12px 0 10px 0;
+    height: 20px;
+  }
+
+  .pulse-wrap svg{ width: 100%; height:100%; display:block; overflow:visible; }
+
+  .pulse-path{
+    fill:none;
+    stroke: var(--brass);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 340;
+    stroke-dashoffset: 340;
+    animation: draw 2.2s ease-out 0.4s forwards, glow 3.5s ease-in-out 2.6s infinite;
+  }
+
+  @keyframes draw{
+    to{ stroke-dashoffset:0; }
+  }
+  @keyframes glow{
+    0%,100%{ opacity:0.85; }
+    50%{ opacity:1; filter: drop-shadow(0 0 2px rgba(184,147,75,0.5)); }
+  }
+
+  .specialty{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--bone);
+    opacity: 0.9;
+  }
+
+  .practice{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    margin-top: 3px;
+    color: #9DB6A8;
+  }
+
+  /* ---------- BACK ---------- */
+  .back{
+    background: linear-gradient(155deg, var(--bone) 0%, #E5DDC9 100%);
+    color: var(--pine-deep);
+  }
+
+  .back::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:10px;
+    border: 1px solid rgba(14,36,29,0.14);
+    pointer-events:none;
+  }
+
+  .back-inner{
+    position:relative;
+    height:100%;
+    padding: 0.24in 0.3in;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+
+  .back-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .mark{
+    font-family:'Fraunces', serif;
+    font-size: 21px;
+    font-weight:500;
+    color: var(--pine);
+    letter-spacing:0.01em;
+  }
+
+  .mark span{
+    color: var(--brass);
+  }
+
+  .tagline{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform:uppercase;
+    color: var(--sage);
+    text-align:right;
+    max-width: 1.2in;
+    line-height:1.5;
+  }
+
+  .divider{
+    height:1px;
+    background: linear-gradient(90deg, rgba(14,36,29,0.02), rgba(14,36,29,0.28), rgba(14,36,29,0.02));
+    margin: 10px 0;
+  }
+
+  .contact-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 18px;
+  }
+
+  .contact-item{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+  }
+
+  .contact-item .k{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 7.5px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color: var(--sage);
+  }
+
+  .contact-item .v{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 11.5px;
+    font-weight:500;
+    color: var(--pine-deep);
+  }
+
+  .back-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+  }
+
+  .license{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 7.5px;
+    letter-spacing:0.1em;
+    color: rgba(14,36,29,0.55);
+  }
+
+  .qr{
+    width: 0.5in;
+    height: 0.5in;
+    border-radius: 4px;
+    background: var(--pine-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .qr svg{ width:78%; height:78%; }
+
+  .footer-note{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: rgba(237,231,217,0.4);
+    text-align:center;
+    max-width: 480px;
+    line-height:1.6;
+  }
+  .footer-note b{ color: var(--brass-lt); font-weight:500; }
+
+  @media (max-width: 480px){
+    .card{ width: 92vw; height: calc(92vw / 1.75); }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="label">Premium Physician Card — Front &amp; Back</div>
+
+  <div class="cards">
+    <!-- FRONT -->
+    <div class="card front">
+      <div class="front-inner">
+        <p class="eyebrow">Board Certified</p>
+        <h1 class="name">Dr. Elena&nbsp;Marlowe</h1>
+        <p class="credentials">MD, FACC</p>
+
+        <div class="pulse-wrap">
+          <svg viewBox="0 0 300 24" preserveAspectRatio="none">
+            <path class="pulse-path" d="M0,12 L60,12 L75,12 L85,2 L96,22 L107,12 L122,12 L132,7 L140,17 L150,12 L300,12" />
+          </svg>
+        </div>
+
+        <p class="specialty">Interventional Cardiology</p>
+        <p class="practice">Meridian Heart &amp; Vascular Institute</p>
+      </div>
+    </div>
+
+    <!-- BACK -->
+    <div class="card back">
+      <div class="back-inner">
+        <div class="back-top">
+          <div class="mark">M<span>H</span>V<span>I</span></div>
+          <div class="tagline">Meridian Heart<br>&amp; Vascular Institute</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="contact-grid">
+          <div class="contact-item">
+            <span class="k">Direct</span>
+            <span class="v">+1 (617) 555-0148</span>
+          </div>
+          <div class="contact-item">
+            <span class="k">Front Desk</span>
+            <span class="v">+1 (617) 555-0100</span>
+          </div>
+          <div class="contact-item">
+            <span class="k">Email</span>
+            <span class="v">e.marlowe@mhvi.care</span>
+          </div>
+          <div class="contact-item">
+            <span class="k">Office</span>
+            <span class="v">220 Beacon St, Ste 4B</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="back-bottom">
+          <span class="license">LIC. NO. MD-48213 · MA</span>
+          <div class="qr" aria-label="QR code placeholder">
+            <svg viewBox="0 0 29 29" fill="none">
+              <rect width="29" height="29" fill="none"/>
+              <g fill="#EDE7D9">
+                <rect x="0" y="0" width="9" height="9"/>
+                <rect x="2" y="2" width="5" height="5" fill="#0E241D"/>
+                <rect x="20" y="0" width="9" height="9"/>
+                <rect x="22" y="2" width="5" height="5" fill="#0E241D"/>
+                <rect x="0" y="20" width="9" height="9"/>
+                <rect x="2" y="22" width="5" height="5" fill="#0E241D"/>
+                <rect x="11" y="0" width="2" height="2"/>
+                <rect x="14" y="0" width="2" height="2"/>
+                <rect x="11" y="4" width="2" height="2"/>
+                <rect x="17" y="4" width="2" height="2"/>
+                <rect x="11" y="11" width="7" height="7"/>
+                <rect x="13" y="13" width="3" height="3" fill="#0E241D"/>
+                <rect x="0" y="11" width="2" height="2"/>
+                <rect x="0" y="14" width="2" height="2"/>
+                <rect x="4" y="11" width="2" height="2"/>
+                <rect x="24" y="11" width="2" height="2"/>
+                <rect x="27" y="14" width="2" height="2"/>
+                <rect x="24" y="17" width="2" height="2"/>
+                <rect x="11" y="24" width="2" height="2"/>
+                <rect x="15" y="27" width="2" height="2"/>
+                <rect x="20" y="24" width="9" height="2"/>
+                <rect x="20" y="27" width="2" height="2"/>
+                <rect x="25" y="24" width="2" height="5"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-note">Placeholder details shown — swap in <b>name, credentials, specialty, practice and contact info</b>. Cards render at true print size (3.5in × 2in card area); export or screenshot at high resolution for a print shop.</p>
+</div>
+
+</body>
+</html>
