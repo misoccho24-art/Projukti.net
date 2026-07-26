@@ -36,6 +36,22 @@
             margin-bottom: 14px;
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .filter-chevron {
+            width: 16px;
+            height: 16px;
+            flex: 0 0 auto;
+            transition: transform 0.25s ease;
+        }
+
+        .filter-sidebar.collapsed .filter-chevron {
+            transform: rotate(-90deg);
         }
 
         .filter-list {
@@ -45,6 +61,16 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
+            overflow: hidden;
+            max-height: 600px;
+            opacity: 1;
+            transition: max-height 0.3s ease, opacity 0.25s ease;
+        }
+
+        .filter-sidebar.collapsed .filter-list {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .filter-btn {
@@ -94,6 +120,7 @@
             .filter-list {
                 flex-direction: row;
                 flex-wrap: wrap;
+                max-height: 400px;
             }
             .filter-btn {
                 width: auto;
@@ -309,7 +336,10 @@
             <div class="doctors-page-layout">
 
                 <aside class="filter-sidebar" id="filterSidebar">
-                    <div class="filter-sidebar-head">বিভাগ অনুযায়ী খুঁজুন</div>
+                    <div class="filter-sidebar-head" id="filterSidebarHead">
+                        <span>বিভাগ অনুযায়ী খুঁজুন</span>
+                        <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
                     <ul class="filter-list" id="filterList">
                         <li><button class="filter-btn active" data-filter="all">সকল ডাক্তার</button></li>
                         <li><button class="filter-btn" data-filter="medicine">মেডিসিন বিশেষজ্ঞ</button></li>
@@ -383,8 +413,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -451,8 +481,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, শেরপুর</span>
@@ -519,8 +549,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -587,8 +617,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -655,8 +685,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -723,8 +753,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -790,8 +820,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, শেরপুর</span>
@@ -858,8 +888,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -925,8 +955,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, শেরপুর</span>
@@ -992,8 +1022,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, শেরপুর</span>
@@ -1060,8 +1090,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -1127,8 +1157,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -1194,8 +1224,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
@@ -1259,8 +1289,8 @@
                                 </div>
                                 <div class="dc-contact-col">
                                 <a class="dc-contact-row dc-tel" href="tel:01725900093"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01725-900093</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01896197260"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01896-197260</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01707670771"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01707-670771</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">01751-067002</span></a>
+                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone">০১৮৪৫-৮৫৪৫৬১</span></a>
                                     <div class="dc-contact-row">
                                         <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
                                         <span class="dc-txt">জেলা হাসপাতাল রোড, শেরপুর</span>
@@ -1332,6 +1362,14 @@
             card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
             card.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
         });
+
+        const filterSidebar = document.getElementById('filterSidebar');
+        const filterSidebarHead = document.getElementById('filterSidebarHead');
+        if (filterSidebar && filterSidebarHead) {
+            filterSidebarHead.addEventListener('click', () => {
+                filterSidebar.classList.toggle('collapsed');
+            });
+        }
 
         const filterButtons = document.querySelectorAll('.filter-btn');
         const doctorCards = document.querySelectorAll('.doctor-card');
