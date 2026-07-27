@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // The site's text content is public to read (so the website
+    // itself can load it for every visitor) but can only be
+    // written by a signed-in user (your client, once you add
+    // them in Authentication → Users).
+    match /content/site {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Everything else stays locked down by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

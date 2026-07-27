@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Editor — প্রযুক্তি হাসপাতাল</title>
+<style>
+  :root{
+    --deep:#0F3D34; --bright:#1E7A5F; --mint:#EAF6F0; --line:#DCE9E3;
+    --ink:#1B2B25; --muted:#5C7A6B; --bg:#F7FBF9; --white:#fff;
+    --danger:#B3261E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Segoe UI', Arial, Helvetica, sans-serif;
+    background:var(--bg); color:var(--ink);
+  }
+  header.topbar{
+    background:var(--deep); color:#fff; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:20;
+  }
+  header.topbar h1{ font-size:1.05rem; margin:0; font-weight:700; }
+  header.topbar .sub{ font-size:0.78rem; color:#BFE3D4; }
+  #logoutBtn{
+    background:transparent; border:1px solid rgba(255,255,255,0.4); color:#fff;
+    padding:8px 14px; border-radius:8px; cursor:pointer; font-size:0.85rem;
+  }
+  #logoutBtn:hover{ background:rgba(255,255,255,0.12); }
+
+  #loginScreen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .login-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:36px 32px; width:100%; max-width:360px; box-shadow:0 12px 30px rgba(15,61,52,0.08);
+  }
+  .login-card h2{ margin:0 0 4px; color:var(--deep); }
+  .login-card p.hint{ margin:0 0 22px; color:var(--muted); font-size:0.85rem; }
+  .login-card label{ display:block; font-size:0.82rem; font-weight:600; margin:14px 0 6px; color:var(--ink); }
+  .login-card input{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:0.95rem;
+  }
+  .login-card button{
+    width:100%; margin-top:20px; padding:11px; border:none; border-radius:8px;
+    background:var(--bright); color:#fff; font-weight:700; font-size:0.95rem; cursor:pointer;
+  }
+  .login-card button:disabled{ opacity:0.6; cursor:default; }
+  #loginError{ color:var(--danger); font-size:0.85rem; margin-top:12px; display:none; }
+
+  #app{ display:none; max-width:900px; margin:0 auto; padding:20px 16px 100px; }
+  #loadingMsg{ text-align:center; padding:60px 20px; color:var(--muted); }
+
+  .group{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    margin-bottom:14px; overflow:hidden;
+  }
+  .group-head{
+    padding:14px 18px; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+    background:var(--mint);
+  }
+  .group-head h3{ margin:0; font-size:0.95rem; color:var(--deep); }
+  .group-head .badge{ font-size:0.72rem; color:var(--muted); font-weight:600; }
+  .group-body{ padding:6px 18px 16px; display:none; }
+  .group.open .group-body{ display:block; }
+  .group-head .chevron{ transition:transform 0.15s ease; color:var(--bright); }
+  .group.open .chevron{ transform:rotate(90deg); }
+
+  .field{ margin:14px 0; }
+  .field label{
+    display:flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:600;
+    color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.02em;
+  }
+  .field label .pages{
+    text-transform:none; font-weight:500; font-size:0.72rem; color:#8AA79A; background:#fff;
+    border:1px solid var(--line); padding:1px 8px; border-radius:999px;
+  }
+  .field input[type=text], .field textarea{
+    width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px;
+    font-size:0.92rem; font-family:inherit; color:var(--ink);
+  }
+  .field textarea{ min-height:64px; resize:vertical; }
+
+  #saveBar{
+    position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line);
+    padding:14px 20px; display:flex; align-items:center; justify-content:center; gap:14px;
+    box-shadow:0 -6px 20px rgba(0,0,0,0.06); z-index:15;
+  }
+  #saveBtn{
+    background:var(--deep); color:#fff; border:none; padding:12px 28px; border-radius:10px;
+    font-weight:700; font-size:0.95rem; cursor:pointer;
+  }
+  #saveBtn:disabled{ opacity:0.6; cursor:default; }
+  #saveStatus{ font-size:0.85rem; color:var(--muted); }
+  #saveStatus.ok{ color:var(--bright); font-weight:600; }
+  #saveStatus.err{ color:var(--danger); font-weight:600; }
+</style>
+</head>
+<body>
+
+  <div id="loginScreen">
+    <div class="login-card">
+      <h2>Site Editor</h2>
+      <p class="hint">প্রযুক্তি হাসপাতাল ও ডায়াগনস্টিক সেন্টার — log in to edit site text.</p>
+      <label for="emailInput">Email</label>
+      <input type="text" id="emailInput" autocomplete="username" />
+      <label for="passInput">Password</label>
+      <input type="password" id="passInput" autocomplete="current-password" />
+      <button id="loginBtn">Log in</button>
+      <div id="loginError"></div>
+    </div>
+  </div>
+
+  <header class="topbar" id="topbar" style="display:none;">
+    <div>
+      <h1>Site Editor</h1>
+      <div class="sub" id="whoAmI"></div>
+    </div>
+    <button id="logoutBtn">Log out</button>
+  </header>
+
+  <div id="app">
+    <div id="loadingMsg">Loading page content…</div>
+    <div id="groups"></div>
+  </div>
+
+  <div id="saveBar" style="display:none;">
+    <button id="saveBtn">Save changes</button>
+    <span id="saveStatus"></span>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <script>
+    var PAGES = ['index.html', 'contact.html'];
+
+    var GROUP_RULES = [
+      { test: function(id){ return /^doc(\d+)-/.test(id); },
+        group: function(id){ var n = id.match(/^doc(\d+)-/)[1]; return { key: 'doc'+n, title: 'Doctor ' + n }; } },
+      { test: function(id){ return /^stat\d+-/.test(id); }, group: function(){ return { key:'stats', title:'Trust Stats (top strip)' }; } },
+      { test: function(id){ return /^why/.test(id); }, group: function(){ return { key:'why', title:'Why Choose Us section' }; } },
+      { test: function(id){ return /^dept/.test(id) || /^departments-/.test(id); }, group: function(){ return { key:'dept', title:'Departments / Services section' }; } },
+      { test: function(id){ return /^schedule/.test(id); }, group: function(){ return { key:'schedule', title:'Schedule & Location section' }; } },
+      { test: function(id){ return /^cta-/.test(id); }, group: function(){ return { key:'cta', title:'Final Call-To-Action band' }; } },
+      { test: function(id){ return /^filter-/.test(id); }, group: function(){ return { key:'filters', title:'Doctor Filter Buttons' }; } },
+      { test: function(id){ return id === 'doctors-eyebrow' || id === 'doctors-title'; }, group: function(){ return { key:'doctorshead', title:'Doctors Section Heading' }; } },
+      { test: function(id){ return /^hero-/.test(id); }, group: function(){ return { key:'hero', title:'Homepage Hero' }; } },
+      { test: function(id){ return /^contact-/.test(id); }, group: function(){ return { key:'contactpage', title:'Contact Page' }; } },
+      { test: function(){ return true; }, group: function(){ return { key:'shared', title:'Header & Footer (shared across pages)' }; } }
+    ];
+
+    function groupFor(id){
+      for (var i=0;i<GROUP_RULES.length;i++){
+        if (GROUP_RULES[i].test(id)) return GROUP_RULES[i].group(id);
+      }
+    }
+
+    function labelFor(id){
+      var parts = id.split('-');
+      var last = parts[parts.length-1];
+      var map = {
+        headline:'Headline', subline:'Sub-line', pill:'Badge text', name:'Name', desig:'Designation',
+        schedule:'Schedule text', address:'Address', num:'Number', label:'Label', title:'Title',
+        desc:'Description', day:'Day', hours:'Hours', eyebrow:'Eyebrow tag', cta:'Button text',
+        sub:'Subtitle'
+      };
+      if (/^phone\d+$/.test(last)) return 'Phone ' + last.replace('phone','');
+      if (/^service\d+$/.test(last)) return 'Service tag ' + last.replace('service','');
+      if (/^cred\d+$/.test(last)) return 'Credential line ' + last.replace('cred','');
+      if (map[last]) return map[last];
+      return last;
+    }
+
+    function isMultiline(defaultVal){
+      return defaultVal.length > 55 || /<br\s*\/?>/i.test(defaultVal);
+    }
+
+    // ---- 1. Discover fields by fetching + parsing both pages ----
+    function discoverFields(){
+      return Promise.all(PAGES.map(function(page){
+        return fetch(page).then(function(r){ return r.text(); }).then(function(html){
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var els = doc.querySelectorAll('[data-edit-id]');
+          var list = [];
+          els.forEach(function(el){
+            var id = el.getAttribute('data-edit-id');
+            var isHtml = el.hasAttribute('data-edit-html');
+            var value = isHtml ? el.innerHTML.trim() : el.textContent.trim();
+            list.push({ id: id, isHtml: isHtml, defaultValue: value, page: page });
+          });
+          return list;
+        });
+      })).then(function(results){
+        var byId = {};
+        var order = [];
+        results.forEach(function(list){
+          list.forEach(function(f){
+            if (!byId[f.id]){
+              byId[f.id] = { id:f.id, isHtml:f.isHtml, defaultValue:f.defaultValue, pages:[f.page] };
+              order.push(f.id);
+            } else if (byId[f.id].pages.indexOf(f.page) === -1) {
+              byId[f.id].pages.push(f.page);
+            }
+          });
+        });
+        return order.map(function(id){ return byId[id]; });
+      });
+    }
+
+    var PAGE_LABELS = { 'index.html': 'Home', 'contact.html': 'Contact' };
+
+    function pagesBadge(pages){
+      return pages.map(function(p){ return PAGE_LABELS[p] || p; }).join(' + ');
+    }
+
+    var fieldInputs = {}; // id -> input/textarea element
+
+    function render(fields, savedData){
+      var groupsMap = {}; // key -> { title, fields: [] }
+      var order = [];
+      fields.forEach(function(f){
+        var g = groupFor(f.id);
+        if (!groupsMap[g.key]){ groupsMap[g.key] = { title: g.title, fields: [] }; order.push(g.key); }
+        groupsMap[g.key].fields.push(f);
+      });
+
+      // friendlier doctor group titles using the doctor's saved/default name
+      order.forEach(function(key){
+        if (key.indexOf('doc') === 0 && key !== 'doctorshead'){
+          var nameField = groupsMap[key].fields.filter(function(f){ return /-name$/.test(f.id); })[0];
+          if (nameField){
+            var val = (savedData && savedData[nameField.id]) || nameField.defaultValue;
+            if (val) groupsMap[key].title += ' — ' + val;
+          }
+        }
+      });
+
+      var container = document.getElementById('groups');
+      container.innerHTML = '';
+
+      order.forEach(function(key){
+        var g = groupsMap[key];
+        var groupEl = document.createElement('div');
+        groupEl.className = 'group';
+
+        var head = document.createElement('div');
+        head.className = 'group-head';
+        head.innerHTML = '<h3>' + g.title + '</h3><span class="badge">' + g.fields.length + ' field' + (g.fields.length===1?'':'s') + ' <span class="chevron">▶</span></span>';
+        head.addEventListener('click', function(){ groupEl.classList.toggle('open'); });
+        groupEl.appendChild(head);
+
+        var body = document.createElement('div');
+        body.className = 'group-body';
+
+        g.fields.forEach(function(f){
+          var wrap = document.createElement('div');
+          wrap.className = 'field';
+
+          var label = document.createElement('label');
+          label.innerHTML = labelFor(f.id) + ' <span class="pages">' + pagesBadge(f.pages) + '</span>';
+          wrap.appendChild(label);
+
+          var currentValue = (savedData && Object.prototype.hasOwnProperty.call(savedData, f.id)) ? savedData[f.id] : f.defaultValue;
+
+          var input;
+          if (isMultiline(f.defaultValue)){
+            input = document.createElement('textarea');
+            input.value = currentValue;
+          } else {
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentValue;
+          }
+          input.dataset.fieldId = f.id;
+          fieldInputs[f.id] = input;
+          wrap.appendChild(input);
+
+          body.appendChild(wrap);
+        });
+
+        groupEl.appendChild(body);
+        container.appendChild(groupEl);
+      });
+    }
+
+    function loadEditor(){
+      document.getElementById('loadingMsg').style.display = 'block';
+      Promise.all([discoverFields(), CONTENT_DOC.get()]).then(function(results){
+        var fields = results[0];
+        var doc = results[1];
+        var savedData = doc.exists ? doc.data() : {};
+        document.getElementById('loadingMsg').style.display = 'none';
+        render(fields, savedData);
+        document.getElementById('saveBar').style.display = 'flex';
+      }).catch(function(err){
+        document.getElementById('loadingMsg').textContent = 'Could not load page content: ' + err.message;
+      });
+    }
+
+    document.getElementById('saveBtn').addEventListener('click', function(){
+      var btn = document.getElementById('saveBtn');
+      var status = document.getElementById('saveStatus');
+      var data = {};
+      Object.keys(fieldInputs).forEach(function(id){ data[id] = fieldInputs[id].value; });
+
+      btn.disabled = true;
+      status.textContent = 'Saving…';
+      status.className = '';
+
+      CONTENT_DOC.set(data, { merge: true }).then(function(){
+        status.textContent = 'Saved ✓';
+        status.className = 'ok';
+        btn.disabled = false;
+      }).catch(function(err){
+        status.textContent = 'Could not save: ' + err.message;
+        status.className = 'err';
+        btn.disabled = false;
+      });
+    });
+
+    // ---- Auth ----
+    document.getElementById('loginBtn').addEventListener('click', function(){
+      var email = document.getElementById('emailInput').value.trim();
+      var pass = document.getElementById('passInput').value;
+      var errBox = document.getElementById('loginError');
+      errBox.style.display = 'none';
+      auth.signInWithEmailAndPassword(email, pass).catch(function(err){
+        errBox.textContent = err.message;
+        errBox.style.display = 'block';
+      });
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', function(){
+      auth.signOut();
+    });
+
+    auth.onAuthStateChanged(function(user){
+      if (user){
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('topbar').style.display = 'flex';
+        document.getElementById('whoAmI').textContent = user.email;
+        document.getElementById('app').style.display = 'block';
+        loadEditor();
+      } else {
+        document.getElementById('loginScreen').style.display = 'flex';
+        document.getElementById('topbar').style.display = 'none';
+        document.getElementById('app').style.display = 'none';
+        document.getElementById('saveBar').style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
