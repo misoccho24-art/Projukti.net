@@ -3,452 +3,354 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Site — Admin</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" href="index.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Site Editor — প্রযুক্তি হাসপাতাল</title>
 <style>
-  body { max-width: 760px; margin: 0 auto; padding: 48px 24px 120px; }
-  .admin-header { margin-bottom: 32px; }
-  .admin-header h1 { font-family: var(--font-display); color: var(--ivory); font-size: 30px; margin-bottom: 6px; }
-  .admin-header p { color: var(--ivory-soft); font-size: 14px; }
-
-  .panel { background: var(--ink-panel); border: 1px solid var(--line); padding: 24px; margin-bottom: 20px; }
-  .panel h2 { font-family: var(--font-display); color: var(--gold); font-size: 18px; margin-bottom: 4px; }
-  .panel .panel-sub { color: var(--ivory-faint); font-size: 12px; margin-bottom: 16px; }
-
-  label { display: block; color: var(--ivory-soft); font-size: 13px; margin: 14px 0 6px; }
-  input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
-    width: 100%; box-sizing: border-box; background: var(--ink-panel-2); border: 1px solid var(--line);
-    color: var(--ivory); padding: 10px 12px; font-family: var(--font-body); font-size: 14px;
+  :root{
+    --deep:#0F3D34; --bright:#1E7A5F; --mint:#EAF6F0; --line:#DCE9E3;
+    --ink:#1B2B25; --muted:#5C7A6B; --bg:#F7FBF9; --white:#fff;
+    --danger:#B3261E;
   }
-  textarea { resize: vertical; min-height: 60px; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Segoe UI', Arial, Helvetica, sans-serif;
+    background:var(--bg); color:var(--ink);
+  }
+  header.topbar{
+    background:var(--deep); color:#fff; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:20;
+  }
+  header.topbar h1{ font-size:1.05rem; margin:0; font-weight:700; }
+  header.topbar .sub{ font-size:0.78rem; color:#BFE3D4; }
+  #logoutBtn{
+    background:transparent; border:1px solid rgba(255,255,255,0.4); color:#fff;
+    padding:8px 14px; border-radius:8px; cursor:pointer; font-size:0.85rem;
+  }
+  #logoutBtn:hover{ background:rgba(255,255,255,0.12); }
 
-  .btn { display: inline-block; background: var(--gold); color: var(--black); border: none; padding: 11px 20px;
-    font-family: var(--font-body); font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 10px; }
-  .btn:hover { background: var(--gold-light); }
-  .btn-ghost { background: transparent; color: var(--ivory-soft); border: 1px solid var(--line); }
-  .btn-ghost:hover { color: var(--ivory); border-color: var(--gold); }
-  .btn-danger { background: transparent; color: #d97757; border: 1px solid rgba(217,119,87,0.4); padding: 6px 12px; font-size: 12px; }
+  #loginScreen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .login-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:36px 32px; width:100%; max-width:360px; box-shadow:0 12px 30px rgba(15,61,52,0.08);
+  }
+  .login-card h2{ margin:0 0 4px; color:var(--deep); }
+  .login-card p.hint{ margin:0 0 22px; color:var(--muted); font-size:0.85rem; }
+  .login-card label{ display:block; font-size:0.82rem; font-weight:600; margin:14px 0 6px; color:var(--ink); }
+  .login-card input{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:0.95rem;
+  }
+  .login-card button{
+    width:100%; margin-top:20px; padding:11px; border:none; border-radius:8px;
+    background:var(--bright); color:#fff; font-weight:700; font-size:0.95rem; cursor:pointer;
+  }
+  .login-card button:disabled{ opacity:0.6; cursor:default; }
+  #loginError{ color:var(--danger); font-size:0.85rem; margin-top:12px; display:none; }
 
-  .row-item { border: 1px solid var(--line); padding: 16px; margin-bottom: 12px; position: relative; }
-  .row-item-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-  .row-item-top span { color: var(--gold); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  #app{ display:none; max-width:900px; margin:0 auto; padding:20px 16px 100px; }
+  #loadingMsg{ text-align:center; padding:60px 20px; color:var(--muted); }
 
-  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
-  .checkbox-row input { width: auto; }
-  .checkbox-row label { margin: 0; }
+  .group{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    margin-bottom:14px; overflow:hidden;
+  }
+  .group-head{
+    padding:14px 18px; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+    background:var(--mint);
+  }
+  .group-head h3{ margin:0; font-size:0.95rem; color:var(--deep); }
+  .group-head .badge{ font-size:0.72rem; color:var(--muted); font-weight:600; }
+  .group-body{ padding:6px 18px 16px; display:none; }
+  .group.open .group-body{ display:block; }
+  .group-head .chevron{ transition:transform 0.15s ease; color:var(--bright); }
+  .group.open .chevron{ transform:rotate(90deg); }
 
-  #loginPanel { max-width: 380px; margin: 80px auto; }
-  #status { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--ink-panel);
-    border: 1px solid var(--gold); color: var(--ivory); padding: 10px 20px; font-size: 13px; display: none; z-index: 20; }
-  #adminArea { display: none; }
-  .signout { color: var(--ivory-faint); font-size: 13px; cursor: pointer; text-decoration: underline; }
-  .error { color: #d97757; font-size: 13px; margin-top: 10px; display: none; }
+  .field{ margin:14px 0; }
+  .field label{
+    display:flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:600;
+    color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.02em;
+  }
+  .field label .pages{
+    text-transform:none; font-weight:500; font-size:0.72rem; color:#8AA79A; background:#fff;
+    border:1px solid var(--line); padding:1px 8px; border-radius:999px;
+  }
+  .field input[type=text], .field textarea{
+    width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px;
+    font-size:0.92rem; font-family:inherit; color:var(--ink);
+  }
+  .field textarea{ min-height:64px; resize:vertical; }
 
-  .jump-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .jump-nav a { color: var(--ivory-soft); font-size: 12px; border: 1px solid var(--line); padding: 6px 10px; text-decoration: none; }
-  .jump-nav a:hover { color: var(--gold); border-color: var(--gold); }
-
-  .save-bar { position: sticky; bottom: 0; background: var(--ink); padding: 16px 0; margin-top: 8px; }
+  #saveBar{
+    position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line);
+    padding:14px 20px; display:flex; align-items:center; justify-content:center; gap:14px;
+    box-shadow:0 -6px 20px rgba(0,0,0,0.06); z-index:15;
+  }
+  #saveBtn{
+    background:var(--deep); color:#fff; border:none; padding:12px 28px; border-radius:10px;
+    font-weight:700; font-size:0.95rem; cursor:pointer;
+  }
+  #saveBtn:disabled{ opacity:0.6; cursor:default; }
+  #saveStatus{ font-size:0.85rem; color:var(--muted); }
+  #saveStatus.ok{ color:var(--bright); font-weight:600; }
+  #saveStatus.err{ color:var(--danger); font-weight:600; }
 </style>
 </head>
 <body>
 
-  <div id="loginPanel" class="panel">
-    <h2>Sign in to edit</h2>
-    <label for="email">Email</label>
-    <input type="email" id="email" autocomplete="username">
-    <label for="password">Password</label>
-    <input type="password" id="password" autocomplete="current-password">
-    <button class="btn" id="loginBtn">Sign In</button>
-    <p class="error" id="loginError">Incorrect email or password.</p>
-  </div>
-
-  <div id="adminArea">
-    <div class="admin-header">
-      <h1>Edit Site Content</h1>
-      <p>Every text on the site can be edited here. Changes go live as soon as you save. <span class="signout" id="signOutBtn">Sign out</span></p>
-    </div>
-
-    <div class="jump-nav">
-      <a href="#sec-brand">Branding</a>
-      <a href="#sec-hero">Hero</a>
-      <a href="#sec-quals">Qualifications</a>
-      <a href="#sec-services">Services</a>
-      <a href="#sec-contact">Contact Info</a>
-      <a href="#sec-schedule">Schedule</a>
-      <a href="#sec-contactpage">Contact Page</a>
-      <a href="#sec-timelinepage">Timeline Page</a>
-      <a href="#sec-timeline">Timeline Entries</a>
-      <a href="#sec-footer">Footer</a>
-    </div>
-
-    <div class="panel" id="sec-brand">
-      <h2>Branding</h2>
-      <p class="panel-sub">Shown in the navigation bar on every page.</p>
-      <label>Name</label>
-      <input type="text" id="brandName">
-      <label>Title / Tagline</label>
-      <input type="text" id="brandTag">
-    </div>
-
-    <div class="panel" id="sec-hero">
-      <h2>Homepage Hero</h2>
-      <p class="panel-sub">The top section of the homepage.</p>
-      <label>Rating Badge Text</label>
-      <input type="text" id="heroRatingBadge">
-      <label>Eyebrow (small text above headline)</label>
-      <input type="text" id="heroEyebrow">
-      <label>Headline</label>
-      <input type="text" id="heroTitle">
-      <label>Doctor's title / credentials line</label>
-      <textarea id="heroRole"></textarea>
-      <label>Description</label>
-      <textarea id="heroSub"></textarea>
-      <label>Primary Button Text</label>
-      <input type="text" id="heroCtaPrimary">
-      <label>Secondary Button Text</label>
-      <input type="text" id="heroCtaSecondary">
-    </div>
-
-    <div class="panel" id="sec-quals">
-      <h2>Qualifications</h2>
-      <p class="panel-sub">The short badges shown just under the hero (e.g. "MBBS").</p>
-      <div id="qualsList"></div>
-      <button class="btn btn-ghost" id="addQualRow">+ Add Qualification</button>
-    </div>
-
-    <div class="panel" id="sec-services">
-      <h2>Services Section</h2>
-      <p class="panel-sub">Heading text and the full list of services offered.</p>
-      <label>Eyebrow</label>
-      <input type="text" id="servicesEyebrow">
-      <label>Heading</label>
-      <input type="text" id="servicesHeading">
-      <label style="margin-top:22px;">Services List</label>
-      <div id="servicesList"></div>
-      <button class="btn btn-ghost" id="addServiceRow">+ Add Service</button>
-    </div>
-
-    <div class="panel" id="sec-contact">
-      <h2>Contact Info</h2>
-      <p class="panel-sub">Used across the site (footer, contact page, etc).</p>
-      <label>Phone</label>
-      <input type="text" id="contactPhone">
-      <label>Email</label>
-      <input type="text" id="contactEmail">
-      <label>Working Hours</label>
-      <input type="text" id="contactHours">
-      <label>Chamber Address</label>
-      <input type="text" id="contactAddress">
-    </div>
-
-    <div class="panel" id="sec-schedule">
-      <h2>Schedule Section</h2>
-      <p class="panel-sub">The "Schedule & Chamber" block on the homepage.</p>
-      <label>Eyebrow</label>
-      <input type="text" id="scheduleEyebrow">
-      <label>Heading</label>
-      <input type="text" id="scheduleHeading">
-      <label>Location Line</label>
-      <input type="text" id="scheduleLocationLine">
-      <label>Button Text</label>
-      <input type="text" id="scheduleCtaText">
-      <label style="margin-top:22px;">Schedule Rows</label>
-      <div id="scheduleList"></div>
-      <button class="btn btn-ghost" id="addScheduleRow">+ Add Row</button>
-    </div>
-
-    <div class="panel" id="sec-contactpage">
-      <h2>Contact Page</h2>
-      <p class="panel-sub">The heading at the top of the Contact page.</p>
-      <label>Title</label>
-      <input type="text" id="contactPageTitle">
-      <label>Subtitle</label>
-      <input type="text" id="contactPageSub">
-    </div>
-
-    <div class="panel" id="sec-timelinepage">
-      <h2>Timeline Page</h2>
-      <p class="panel-sub">The heading at the top of the Timeline page.</p>
-      <label>Eyebrow</label>
-      <input type="text" id="timelinePageEyebrow">
-      <label>Title</label>
-      <input type="text" id="timelinePageTitle">
-      <label>Subtitle</label>
-      <input type="text" id="timelinePageSub">
-    </div>
-
-    <div class="panel" id="sec-timeline">
-      <h2>Timeline Entries</h2>
-      <div id="timelineList"></div>
-      <button class="btn btn-ghost" id="addTimelineRow">+ Add Timeline Entry</button>
-    </div>
-
-    <div class="panel" id="sec-footer">
-      <h2>Footer</h2>
-      <label>"Quick Links" column label</label>
-      <input type="text" id="footerQuickLinksLabel">
-      <label>"Contact" column label</label>
-      <input type="text" id="footerContactLabel">
-      <label>"Follow" column label</label>
-      <input type="text" id="footerFollowLabel">
-      <label>Copyright Line</label>
-      <input type="text" id="footerCopyright">
-    </div>
-
-    <div class="save-bar">
-      <button class="btn" id="saveBtn">Save Changes</button>
+  <div id="loginScreen">
+    <div class="login-card">
+      <h2>Site Editor</h2>
+      <p class="hint">প্রযুক্তি হাসপাতাল ও ডায়াগনস্টিক সেন্টার — log in to edit site text.</p>
+      <label for="emailInput">Email</label>
+      <input type="text" id="emailInput" autocomplete="username" />
+      <label for="passInput">Password</label>
+      <input type="password" id="passInput" autocomplete="current-password" />
+      <button id="loginBtn">Log in</button>
+      <div id="loginError"></div>
     </div>
   </div>
 
-  <div id="status"></div>
+  <header class="topbar" id="topbar" style="display:none;">
+    <div>
+      <h1>Site Editor</h1>
+      <div class="sub" id="whoAmI"></div>
+    </div>
+    <button id="logoutBtn">Log out</button>
+  </header>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-      getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { firebaseConfig } from "./firebase-config.js";
-    import { loadContent, saveContent } from "./content.js";
+  <div id="app">
+    <div id="loadingMsg">Loading page content…</div>
+    <div id="groups"></div>
+  </div>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+  <div id="saveBar" style="display:none;">
+    <button id="saveBtn">Save changes</button>
+    <span id="saveStatus"></span>
+  </div>
 
-    let content = null;
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
 
-    // ---------- Login ----------
-    document.getElementById("loginBtn").addEventListener("click", async () => {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      document.getElementById("loginError").style.display = "none";
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-      } catch (err) {
-        document.getElementById("loginError").style.display = "block";
+  <script>
+    var PAGES = ['index.html', 'contact.html'];
+
+    var GROUP_RULES = [
+      { test: function(id){ return /^doc(\d+)-/.test(id); },
+        group: function(id){ var n = id.match(/^doc(\d+)-/)[1]; return { key: 'doc'+n, title: 'Doctor ' + n }; } },
+      { test: function(id){ return /^stat\d+-/.test(id); }, group: function(){ return { key:'stats', title:'Trust Stats (top strip)' }; } },
+      { test: function(id){ return /^why/.test(id); }, group: function(){ return { key:'why', title:'Why Choose Us section' }; } },
+      { test: function(id){ return /^dept/.test(id) || /^departments-/.test(id); }, group: function(){ return { key:'dept', title:'Departments / Services section' }; } },
+      { test: function(id){ return /^schedule/.test(id); }, group: function(){ return { key:'schedule', title:'Schedule & Location section' }; } },
+      { test: function(id){ return /^cta-/.test(id); }, group: function(){ return { key:'cta', title:'Final Call-To-Action band' }; } },
+      { test: function(id){ return /^filter-/.test(id); }, group: function(){ return { key:'filters', title:'Doctor Filter Buttons' }; } },
+      { test: function(id){ return id === 'doctors-eyebrow' || id === 'doctors-title'; }, group: function(){ return { key:'doctorshead', title:'Doctors Section Heading' }; } },
+      { test: function(id){ return /^hero-/.test(id); }, group: function(){ return { key:'hero', title:'Homepage Hero' }; } },
+      { test: function(id){ return /^contact-/.test(id); }, group: function(){ return { key:'contactpage', title:'Contact Page' }; } },
+      { test: function(){ return true; }, group: function(){ return { key:'shared', title:'Header & Footer (shared across pages)' }; } }
+    ];
+
+    function groupFor(id){
+      for (var i=0;i<GROUP_RULES.length;i++){
+        if (GROUP_RULES[i].test(id)) return GROUP_RULES[i].group(id);
       }
-    });
-
-    document.getElementById("signOutBtn").addEventListener("click", () => signOut(auth));
-
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        document.getElementById("loginPanel").style.display = "none";
-        document.getElementById("adminArea").style.display = "block";
-        content = await loadContent();
-        populateForm(content);
-      } else {
-        document.getElementById("loginPanel").style.display = "block";
-        document.getElementById("adminArea").style.display = "none";
-      }
-    });
-
-    // ---------- Populate form ----------
-    function populateForm(c) {
-      document.getElementById("brandName").value = c.site.brandName;
-      document.getElementById("brandTag").value = c.site.brandTag;
-
-      document.getElementById("heroRatingBadge").value = c.hero.ratingBadge;
-      document.getElementById("heroEyebrow").value = c.hero.eyebrow;
-      document.getElementById("heroTitle").value = c.hero.title;
-      document.getElementById("heroRole").value = c.hero.role;
-      document.getElementById("heroSub").value = c.hero.sub;
-      document.getElementById("heroCtaPrimary").value = c.hero.ctaPrimary;
-      document.getElementById("heroCtaSecondary").value = c.hero.ctaSecondary;
-
-      document.getElementById("servicesEyebrow").value = c.servicesSection.eyebrow;
-      document.getElementById("servicesHeading").value = c.servicesSection.heading;
-
-      document.getElementById("contactPhone").value = c.contact.phone;
-      document.getElementById("contactEmail").value = c.contact.email;
-      document.getElementById("contactHours").value = c.contact.hours;
-      document.getElementById("contactAddress").value = c.contact.address;
-
-      document.getElementById("scheduleEyebrow").value = c.scheduleSection.eyebrow;
-      document.getElementById("scheduleHeading").value = c.scheduleSection.heading;
-      document.getElementById("scheduleLocationLine").value = c.scheduleSection.locationLine;
-      document.getElementById("scheduleCtaText").value = c.scheduleSection.ctaText;
-
-      document.getElementById("contactPageTitle").value = c.contactPage.heroTitle;
-      document.getElementById("contactPageSub").value = c.contactPage.heroSub;
-
-      document.getElementById("timelinePageEyebrow").value = c.timelinePage.eyebrow;
-      document.getElementById("timelinePageTitle").value = c.timelinePage.title;
-      document.getElementById("timelinePageSub").value = c.timelinePage.sub;
-
-      document.getElementById("footerQuickLinksLabel").value = c.footer.quickLinksLabel;
-      document.getElementById("footerContactLabel").value = c.footer.contactLabel;
-      document.getElementById("footerFollowLabel").value = c.footer.followLabel;
-      document.getElementById("footerCopyright").value = c.footer.copyright;
-
-      renderQualsList(c.qualifications);
-      renderServicesList(c.services);
-      renderScheduleList(c.schedule);
-      renderTimelineList(c.timeline);
     }
 
-    // ---------- Simple text list helper (qualifications & services) ----------
-    function renderSimpleList(wrapId, items, label) {
-      const wrap = document.getElementById(wrapId);
-      wrap.innerHTML = "";
-      items.forEach((val, i) => {
-        const el = document.createElement("div");
-        el.className = "row-item";
-        el.innerHTML = `
-          <div class="row-item-top"><span>${label} ${i + 1}</span><button class="btn btn-danger" data-remove="${i}">Remove</button></div>
-          <input type="text" data-idx="${i}" value="${escAttr(val)}">
-        `;
-        el.querySelector("[data-remove]").addEventListener("click", () => {
-          items.splice(i, 1);
-          renderSimpleList(wrapId, items, label);
-        });
-        el.querySelector("input[data-idx]").addEventListener("input", (e) => {
-          items[i] = e.target.value;
-        });
-        wrap.appendChild(el);
-      });
+    function labelFor(id){
+      var parts = id.split('-');
+      var last = parts[parts.length-1];
+      var map = {
+        headline:'Headline', subline:'Sub-line', pill:'Badge text', name:'Name', desig:'Designation',
+        schedule:'Schedule text', address:'Address', num:'Number', label:'Label', title:'Title',
+        desc:'Description', day:'Day', hours:'Hours', eyebrow:'Eyebrow tag', cta:'Button text',
+        sub:'Subtitle'
+      };
+      if (/^phone\d+$/.test(last)) return 'Phone ' + last.replace('phone','');
+      if (/^service\d+$/.test(last)) return 'Service tag ' + last.replace('service','');
+      if (/^cred\d+$/.test(last)) return 'Credential line ' + last.replace('cred','');
+      if (map[last]) return map[last];
+      return last;
     }
 
-    function renderQualsList(items) { renderSimpleList("qualsList", items, "Qualification"); }
-    function renderServicesList(items) { renderSimpleList("servicesList", items, "Service"); }
-
-    document.getElementById("addQualRow").addEventListener("click", () => {
-      content.qualifications.push("");
-      renderQualsList(content.qualifications);
-    });
-
-    document.getElementById("addServiceRow").addEventListener("click", () => {
-      content.services.push("");
-      renderServicesList(content.services);
-    });
-
-    function renderScheduleList(rows) {
-      const wrap = document.getElementById("scheduleList");
-      wrap.innerHTML = "";
-      rows.forEach((row, i) => {
-        const el = document.createElement("div");
-        el.className = "row-item";
-        el.innerHTML = `
-          <div class="row-item-top"><span>Row ${i + 1}</span><button class="btn btn-danger" data-remove="${i}">Remove</button></div>
-          <label>Day(s)</label><input type="text" data-field="day" value="${escAttr(row.day)}">
-          <label>Time</label><input type="text" data-field="time" value="${escAttr(row.time)}">
-          <label>Location</label><input type="text" data-field="location" value="${escAttr(row.location)}">
-        `;
-        el.querySelector("[data-remove]").addEventListener("click", () => { rows.splice(i, 1); renderScheduleList(rows); });
-        el.querySelectorAll("[data-field]").forEach(inp => {
-          inp.addEventListener("input", () => { row[inp.dataset.field] = inp.value; });
-        });
-        wrap.appendChild(el);
-      });
+    function isMultiline(defaultVal){
+      return defaultVal.length > 55 || /<br\s*\/?>/i.test(defaultVal);
     }
 
-    function renderTimelineList(items) {
-      const wrap = document.getElementById("timelineList");
-      wrap.innerHTML = "";
-      items.forEach((item, i) => {
-        const el = document.createElement("div");
-        el.className = "row-item";
-        el.innerHTML = `
-          <div class="row-item-top"><span>Entry ${i + 1}</span><button class="btn btn-danger" data-remove="${i}">Remove</button></div>
-          <label>Year</label><input type="number" data-field="year" value="${item.year}">
-          <label>Type</label>
-          <select data-field="type">
-            ${["birth", "education", "career", "present"].map(t => `<option value="${t}" ${item.type === t ? "selected" : ""}>${t}</option>`).join("")}
-          </select>
-          <label>Title</label><input type="text" data-field="title" value="${escAttr(item.title)}">
-          <label>Description</label><textarea data-field="description">${escHtml(item.description)}</textarea>
-          <div class="checkbox-row">
-            <input type="checkbox" id="est-${i}" data-field="estimated" ${item.estimated ? "checked" : ""}>
-            <label for="est-${i}">Year is an estimate</label>
-          </div>
-        `;
-        el.querySelector("[data-remove]").addEventListener("click", () => { items.splice(i, 1); renderTimelineList(items); });
-        el.querySelectorAll("[data-field]").forEach(inp => {
-          const field = inp.dataset.field;
-          const evt = inp.type === "checkbox" ? "change" : "input";
-          inp.addEventListener(evt, () => {
-            if (field === "year") item.year = Number(inp.value);
-            else if (field === "estimated") item.estimated = inp.checked;
-            else item[field] = inp.value;
+    // ---- 1. Discover fields by fetching + parsing both pages ----
+    function discoverFields(){
+      return Promise.all(PAGES.map(function(page){
+        return fetch(page).then(function(r){ return r.text(); }).then(function(html){
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var els = doc.querySelectorAll('[data-edit-id]');
+          var list = [];
+          els.forEach(function(el){
+            var id = el.getAttribute('data-edit-id');
+            var isHtml = el.hasAttribute('data-edit-html');
+            var value = isHtml ? el.innerHTML.trim() : el.textContent.trim();
+            list.push({ id: id, isHtml: isHtml, defaultValue: value, page: page });
+          });
+          return list;
+        });
+      })).then(function(results){
+        var byId = {};
+        var order = [];
+        results.forEach(function(list){
+          list.forEach(function(f){
+            if (!byId[f.id]){
+              byId[f.id] = { id:f.id, isHtml:f.isHtml, defaultValue:f.defaultValue, pages:[f.page] };
+              order.push(f.id);
+            } else if (byId[f.id].pages.indexOf(f.page) === -1) {
+              byId[f.id].pages.push(f.page);
+            }
           });
         });
-        wrap.appendChild(el);
+        return order.map(function(id){ return byId[id]; });
       });
     }
 
-    document.getElementById("addScheduleRow").addEventListener("click", () => {
-      content.schedule.push({ day: "", time: "", location: "" });
-      renderScheduleList(content.schedule);
+    var PAGE_LABELS = { 'index.html': 'Home', 'contact.html': 'Contact' };
+
+    function pagesBadge(pages){
+      return pages.map(function(p){ return PAGE_LABELS[p] || p; }).join(' + ');
+    }
+
+    var fieldInputs = {}; // id -> input/textarea element
+
+    function render(fields, savedData){
+      var groupsMap = {}; // key -> { title, fields: [] }
+      var order = [];
+      fields.forEach(function(f){
+        var g = groupFor(f.id);
+        if (!groupsMap[g.key]){ groupsMap[g.key] = { title: g.title, fields: [] }; order.push(g.key); }
+        groupsMap[g.key].fields.push(f);
+      });
+
+      // friendlier doctor group titles using the doctor's saved/default name
+      order.forEach(function(key){
+        if (key.indexOf('doc') === 0 && key !== 'doctorshead'){
+          var nameField = groupsMap[key].fields.filter(function(f){ return /-name$/.test(f.id); })[0];
+          if (nameField){
+            var val = (savedData && savedData[nameField.id]) || nameField.defaultValue;
+            if (val) groupsMap[key].title += ' — ' + val;
+          }
+        }
+      });
+
+      var container = document.getElementById('groups');
+      container.innerHTML = '';
+
+      order.forEach(function(key){
+        var g = groupsMap[key];
+        var groupEl = document.createElement('div');
+        groupEl.className = 'group';
+
+        var head = document.createElement('div');
+        head.className = 'group-head';
+        head.innerHTML = '<h3>' + g.title + '</h3><span class="badge">' + g.fields.length + ' field' + (g.fields.length===1?'':'s') + ' <span class="chevron">▶</span></span>';
+        head.addEventListener('click', function(){ groupEl.classList.toggle('open'); });
+        groupEl.appendChild(head);
+
+        var body = document.createElement('div');
+        body.className = 'group-body';
+
+        g.fields.forEach(function(f){
+          var wrap = document.createElement('div');
+          wrap.className = 'field';
+
+          var label = document.createElement('label');
+          label.innerHTML = labelFor(f.id) + ' <span class="pages">' + pagesBadge(f.pages) + '</span>';
+          wrap.appendChild(label);
+
+          var currentValue = (savedData && Object.prototype.hasOwnProperty.call(savedData, f.id)) ? savedData[f.id] : f.defaultValue;
+
+          var input;
+          if (isMultiline(f.defaultValue)){
+            input = document.createElement('textarea');
+            input.value = currentValue;
+          } else {
+            input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentValue;
+          }
+          input.dataset.fieldId = f.id;
+          fieldInputs[f.id] = input;
+          wrap.appendChild(input);
+
+          body.appendChild(wrap);
+        });
+
+        groupEl.appendChild(body);
+        container.appendChild(groupEl);
+      });
+    }
+
+    function loadEditor(){
+      document.getElementById('loadingMsg').style.display = 'block';
+      Promise.all([discoverFields(), CONTENT_DOC.get()]).then(function(results){
+        var fields = results[0];
+        var doc = results[1];
+        var savedData = doc.exists ? doc.data() : {};
+        document.getElementById('loadingMsg').style.display = 'none';
+        render(fields, savedData);
+        document.getElementById('saveBar').style.display = 'flex';
+      }).catch(function(err){
+        document.getElementById('loadingMsg').textContent = 'Could not load page content: ' + err.message;
+      });
+    }
+
+    document.getElementById('saveBtn').addEventListener('click', function(){
+      var btn = document.getElementById('saveBtn');
+      var status = document.getElementById('saveStatus');
+      var data = {};
+      Object.keys(fieldInputs).forEach(function(id){ data[id] = fieldInputs[id].value; });
+
+      btn.disabled = true;
+      status.textContent = 'Saving…';
+      status.className = '';
+
+      CONTENT_DOC.set(data, { merge: true }).then(function(){
+        status.textContent = 'Saved ✓';
+        status.className = 'ok';
+        btn.disabled = false;
+      }).catch(function(err){
+        status.textContent = 'Could not save: ' + err.message;
+        status.className = 'err';
+        btn.disabled = false;
+      });
     });
 
-    document.getElementById("addTimelineRow").addEventListener("click", () => {
-      content.timeline.push({ year: new Date().getFullYear(), type: "career", title: "", description: "", image: "", estimated: false });
-      renderTimelineList(content.timeline);
+    // ---- Auth ----
+    document.getElementById('loginBtn').addEventListener('click', function(){
+      var email = document.getElementById('emailInput').value.trim();
+      var pass = document.getElementById('passInput').value;
+      var errBox = document.getElementById('loginError');
+      errBox.style.display = 'none';
+      auth.signInWithEmailAndPassword(email, pass).catch(function(err){
+        errBox.textContent = err.message;
+        errBox.style.display = 'block';
+      });
     });
 
-    // ---------- Save ----------
-    document.getElementById("saveBtn").addEventListener("click", async () => {
-      content.site.brandName = document.getElementById("brandName").value;
-      content.site.brandTag = document.getElementById("brandTag").value;
+    document.getElementById('logoutBtn').addEventListener('click', function(){
+      auth.signOut();
+    });
 
-      content.hero.ratingBadge = document.getElementById("heroRatingBadge").value;
-      content.hero.eyebrow = document.getElementById("heroEyebrow").value;
-      content.hero.title = document.getElementById("heroTitle").value;
-      content.hero.role = document.getElementById("heroRole").value;
-      content.hero.sub = document.getElementById("heroSub").value;
-      content.hero.ctaPrimary = document.getElementById("heroCtaPrimary").value;
-      content.hero.ctaSecondary = document.getElementById("heroCtaSecondary").value;
-
-      content.servicesSection.eyebrow = document.getElementById("servicesEyebrow").value;
-      content.servicesSection.heading = document.getElementById("servicesHeading").value;
-
-      content.contact.phone = document.getElementById("contactPhone").value;
-      content.contact.email = document.getElementById("contactEmail").value;
-      content.contact.hours = document.getElementById("contactHours").value;
-      content.contact.address = document.getElementById("contactAddress").value;
-
-      content.scheduleSection.eyebrow = document.getElementById("scheduleEyebrow").value;
-      content.scheduleSection.heading = document.getElementById("scheduleHeading").value;
-      content.scheduleSection.locationLine = document.getElementById("scheduleLocationLine").value;
-      content.scheduleSection.ctaText = document.getElementById("scheduleCtaText").value;
-
-      content.contactPage.heroTitle = document.getElementById("contactPageTitle").value;
-      content.contactPage.heroSub = document.getElementById("contactPageSub").value;
-
-      content.timelinePage.eyebrow = document.getElementById("timelinePageEyebrow").value;
-      content.timelinePage.title = document.getElementById("timelinePageTitle").value;
-      content.timelinePage.sub = document.getElementById("timelinePageSub").value;
-
-      content.footer.quickLinksLabel = document.getElementById("footerQuickLinksLabel").value;
-      content.footer.contactLabel = document.getElementById("footerContactLabel").value;
-      content.footer.followLabel = document.getElementById("footerFollowLabel").value;
-      content.footer.copyright = document.getElementById("footerCopyright").value;
-
-      showStatus("Saving...");
-      try {
-        await saveContent(content);
-        showStatus("Saved ✓ — live on the site now.");
-      } catch (err) {
-        showStatus("Could not save. Check your connection and try again.");
+    auth.onAuthStateChanged(function(user){
+      if (user){
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('topbar').style.display = 'flex';
+        document.getElementById('whoAmI').textContent = user.email;
+        document.getElementById('app').style.display = 'block';
+        loadEditor();
+      } else {
+        document.getElementById('loginScreen').style.display = 'flex';
+        document.getElementById('topbar').style.display = 'none';
+        document.getElementById('app').style.display = 'none';
+        document.getElementById('saveBar').style.display = 'none';
       }
     });
-
-    function showStatus(msg) {
-      const el = document.getElementById("status");
-      el.textContent = msg;
-      el.style.display = "block";
-      setTimeout(() => { el.style.display = "none"; }, 3000);
-    }
-
-    function escAttr(str) { return escHtml(str).replace(/"/g, "&quot;"); }
-    function escHtml(str) {
-      const div = document.createElement("div");
-      div.textContent = str ?? "";
-      return div.innerHTML;
-    }
   </script>
 </body>
 </html>
