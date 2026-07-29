@@ -3,92 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+    <title>Timeline</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="timeline.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="body">
 
     <nav class="nav">
         <a href="index.html" class="brand">
             <span>
-                                <span class="brand-name" data-edit="site.brandName">Dr. Robiul Islam (Rony)</span>
+                <span class="brand-name" data-edit="site.brandName">Dr. Robiul Islam (Rony)</span>
                 <span class="brand-tag" data-edit="site.brandTag">ENT & Head-Neck Surgeon</span>
             </span>
         </a>
 
         <div class="nav-links-desktop">
             <a href="index.html">Home</a>
-        <li><a href="timeline.html">Timeline</a></li>
-            <a href="contact.html" class="active">Contact</a>
+            <a href="timeline.html" class="active">Timeline</a>
+            <a href="contact.html">Contact</a>
         </div>
 
-        <a class="nav-call" href="tel:01780261010">Book Appointment</a>
+        <a class="nav-call" href="tel:01710258974">Book Appointment</a>
 
         <div class="sidebar-toggle" id="sidebarToggle">☰</div>
     </nav>
 
     <nav class="nav-list" id="sidebar">
         <li><a href="index.html">Home</a></li>
-                <li><a href="timeline.html">Timeline</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="timeline.html" class="active">Timeline</a></li>
+        <li><a href="contact.html">Contact</a></li>
     </nav>
     <div class="overlay" id="overlay"></div>
 
     <div class="content">
 
+        <!-- TIMELINE HERO -->
         <section class="contact-hero">
-            <h1 data-edit="contactPage.heroTitle">Contact</h1>
-            <p data-edit="contactPage.heroSub">Contact us for appointments or any information.</p>
+            <span class="hero-eyebrow" data-edit="timelinePage.eyebrow">Journey</span>
+            <h1 data-edit="timelinePage.title">Life Journey & Achievements</h1>
+            <p data-edit="timelinePage.sub">From student life to today — the journey of becoming a doctor.</p>
         </section>
 
-        <div class="contact-grid">
-            <div class="contact-card">
-                <img class="c-icon" src="phone_in_talk_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="">
-                <p class="c-label">Phone</p>
-                <p data-edit="contact.phone">01710-258974</p>
+        <section class="section">
+            <div class="timeline" id="timeline">
+                <div class="timeline-line">
+                    <div class="timeline-line-fill" id="timelineLineFill"></div>
+                    <div class="timeline-traveler" id="timelineTraveler"></div>
+                </div>
+                <div class="timeline-items" id="timelineItems"></div>
             </div>
-
-            <div class="contact-card">
-                <img class="c-icon" src="mail_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="">
-                <p class="c-label">Email</p>
-                <p data-edit="contact.email">ronykyamc@gmail.com</p>
-            </div>
-
-            <a href="https://www.youtube.com/@dr.ronyrobiulislam8963">
-                <div class="contact-card">
-                <img class="c-icon" src="Untitled design (50).png" alt="">
-                <p class="c-label">Youtube</p>
-                <p data-edit="contact.hours">youtube.com</p>
-            </div>
-            </a>
-
-            <div class="contact-card">
-                <img class="c-icon" src="location_on_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="">
-                <p class="c-label">Chamber</p>
-                <p data-edit="contact.address">Hospital Road, Sadar, Sherpur</p>
-            </div>
-
-            <a href="https://www.facebook.com/profile.php?id=100075675588387">
-            <div class="contact-card">
-                <img class="c-icon" src="Untitled design (49).png" alt="">
-                <p class="c-label">Facebook</p>
-                <p>Facebook.com</p>
-            </div>
-            </a>
-
-            <a href="https://www.instagram.com/dr.robiulislamrony/">
-            <div class="contact-card">
-                <img class="c-icon" src="Untitled design (39).png" alt="">
-                <p class="c-label">Instagram</p>
-                <p>Instagram.com</p>
-            </div>
-            </a>
-
-        </div>
+        </section>
 
         <footer class="footer">
             <div class="supreme">
@@ -119,7 +87,7 @@
 
     </div>
 
-    <a class="float-call" href="tel:01780261010">📞 <span>Call Now</span></a>
+    <a class="float-call" href="tel:01710258974">📞 <span>Call Now</span></a>
 
     <script>
         const toggle = document.getElementById("sidebarToggle");
@@ -141,9 +109,6 @@
         }
     </script>
 
-    <script type="module">
-        import { loadContent, applyTextFields } from "./content.js";
-        loadContent().then(applyTextFields);
-    </script>
+    <script type="module" src="timeline.js"></script>
 </body>
 </html>

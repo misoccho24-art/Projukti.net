@@ -70,6 +70,21 @@ h1, h2, h3 { font-family: var(--font-display); margin: 0; color: var(--ivory); }
   gap: 12px;
 }
 
+.brand::before {
+  content: "R";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: "Noto Serif Bengali", var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  flex: none;
+}
+
 .brand-name {
   font-family: "Noto Serif Bengali", var(--font-display);
   font-weight: 700;

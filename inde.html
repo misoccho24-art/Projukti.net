@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,531 +9,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&family=Hind+Siliguri:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <style>
-      /* ===== Doctor promo card (scoped with dc- prefix, safe alongside index.css) ===== */
-      :root{
-        --dc-deep:    #0A3D28;
-        --dc-deep2:   #062A1B;
-        --dc-leaf:    #157A47;
-        --dc-bright:  #33B36B;
-        --dc-mint:    #DFF3E6;
-        --dc-cream:   #FBF8EE;
-        --dc-line:    rgba(10,61,40,0.16);
-      }
-      .map-band{
-        width: 100%;
-        overflow: hidden;
-        border-radius: 0;
-      }
-      .map-band iframe{
-        width: 100%;
-        min-height: 380px;
-      }
-      .dc-wrap{
-        width:100%;
-        display:flex;
-        justify-content:center;
-        padding: 28px 16px 8px 16px;
-        font-family:'Hind Siliguri', sans-serif;
-        position: relative;
-        z-index: 2;
-      }
-      .dc-card{
-        width: 980px;
-        max-width: 100%;
-        background: var(--dc-cream);
-        border-radius: 20px;
-        overflow: hidden;
-        position: relative;
-        box-shadow: 0 50px 90px -35px rgba(6,42,27,0.5), 0 1px 0 rgba(255,255,255,0.7) inset;
-      }
-      .dc-card::before{
-        content:"";
-        position:absolute; inset:0;
-        background-image: radial-gradient(rgba(10,61,40,0.06) 1px, transparent 1px);
-        background-size: 16px 16px;
-        pointer-events:none;
-        z-index: 0;
-      }
-      .dc-topbar{
-        position: relative; z-index: 2;
-        padding: 24px 40px 12px 40px;
-        display:flex;
-        align-items:center;
-        gap: 14px;
-      }
-      .dc-logo-mark{
-        width: 40px; height: 40px;
-        border-radius: 10px;
-        background: linear-gradient(155deg, var(--dc-bright), var(--dc-deep));
-        display:flex; align-items:center; justify-content:center;
-        flex-shrink:0;
-      }
-      .dc-logo-mark svg{ width: 22px; height: 22px; }
-      .dc-brand-block .dc-brand{
-        font-family:'Tiro Bangla', serif;
-        font-size: 26px;
-        color: var(--dc-deep);
-        line-height:1;
-      }
-      .dc-brand-block .dc-tagline{
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--dc-leaf);
-        margin-top: 3px;
-      }
-      /* ---- Green panel: edge is a thin decorative strip, content flows naturally below it (fixes responsiveness) ---- */
-      .dc-panel{
-        position: relative;
-        z-index: 1;
-        margin-top: 8px;
-        border-radius: 14px 14px 0 0;
-        background: linear-gradient(160deg, #188A50 0%, var(--dc-deep) 52%, var(--dc-deep2) 100%);
-        overflow: hidden;
-      }
-      .dc-panel::after{
-        content:"";
-        position:absolute; inset:0;
-        background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 4px);
-        mix-blend-mode: overlay;
-        pointer-events:none;
-      }
-
-      .dc-panel-content{
-        position: relative; z-index: 2;
-        display:grid;
-        grid-template-columns: 1.3fr 0.7fr;
-        grid-template-areas: "text medal";
-        align-items:center;
-        gap: clamp(18px, 4vw, 34px);
-        padding: clamp(26px, 4vw, 40px) clamp(20px, 5vw, 44px) clamp(30px, 5vw, 42px);
-        color: var(--dc-cream);
-      }
-      .dc-panel-left{ grid-area: text; min-width: 0; }
-      .dc-medallion-col{ grid-area: medal; position: relative; display:flex; justify-content:center; }
-
-      .dc-panel .dc-headline{
-        font-family: 'Tiro Bangla', serif;
-        font-size: clamp(21px, 3.4vw, 36px);
-        line-height: 1.36;
-        margin: 0 0 clamp(8px, 1.6vw, 14px) 0;
-        color: #A9EFC4;
-      }
-      .dc-panel .dc-headline em{ font-style: normal; color: #fff; }
-      .dc-subline{
-        font-size: clamp(13.5px, 1.7vw, 17px);
-        font-weight: 500; color: #C9EFD8;
-        margin: 0 0 clamp(12px, 2vw, 18px) 0;
-      }
-      .dc-pill{
-        display:inline-flex; align-items:center; gap: 8px; flex-wrap: wrap;
-        font-size: clamp(12px, 1.5vw, 15px); font-weight: 600;
-        background: rgba(255,255,255,0.10);
-        border: 1px solid rgba(255,255,255,0.3);
-        padding: 8px clamp(12px, 2vw, 18px);
-        border-radius: 999px;
-        margin-bottom: clamp(16px, 3vw, 26px);
-        max-width: 100%;
-      }
-      .dc-pill svg{ width:16px; height:16px; flex-shrink:0; }
-      .dc-services{ display:flex; gap: clamp(14px, 3vw, 30px); flex-wrap: wrap; }
-      .dc-service{ display:flex; flex-direction:column; align-items:center; gap: 6px; }
-      .dc-service .dc-ring{
-        width: clamp(40px, 8vw, 52px); height: clamp(40px, 8vw, 52px); border-radius: 50%;
-        background: rgba(255,255,255,0.09);
-        border: 1px solid rgba(255,255,255,0.32);
-        display:flex; align-items:center; justify-content:center;
-      }
-      .dc-service svg{ width: clamp(18px, 3.6vw, 24px); height: clamp(18px, 3.6vw, 24px); }
-      .dc-service span{ font-size: 11px; font-weight: 600; color: #DFF5E6; }
-
-      .dc-medallion{
-        width: clamp(120px, 24vw, 210px);
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background: linear-gradient(160deg,#EFF8F1,#DCEEE1);
-        border: 5px solid var(--dc-cream);
-        box-shadow: 0 0 0 3px var(--dc-bright), 0 18px 36px -14px rgba(0,0,0,0.5);
-        overflow: hidden; position: relative; z-index: 4;
-      }
-      .dc-medallion img{
-        width:100%; height:100%;
-        object-fit: cover;
-        object-position: center 12%;
-        display:block;
-      }
-      @media (max-width: 640px){
-        .dc-panel-content{
-          grid-template-columns: 1fr;
-          grid-template-areas: "medal" "text";
-          text-align: center;
-        }
-        .dc-panel-left{ display:flex; flex-direction:column; align-items:center; }
-        .dc-pill{ justify-content:center; }
-        .dc-services{ justify-content:center; }
-        .dc-medallion-col{ margin-top: clamp(16px, 4vw, 26px); }
-      }
-      .dc-bottom{
-        position: relative; z-index: 2;
-        padding: 40px 44px 34px 44px;
-        display:grid; grid-template-columns: 1.25fr 0.75fr; gap: 26px;
-      }
-      .dc-name-block{ text-align: center; margin-top: -6px; }
-      .dc-name-block .dc-name{ font-family:'Tiro Bangla', serif; font-size: 22px; color: var(--dc-deep); margin: 0; }
-      .dc-name-block .dc-desig{ font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; color: var(--dc-bright); text-transform: uppercase; margin-top: 2px; }
-      .dc-cred-col{ padding-top: 30px; }
-      .dc-credentials{ font-size: 14px; line-height: 2; color: #274436; }
-      .dc-credentials li{ list-style: none; display:flex; align-items:flex-start; gap: 8px; }
-      .dc-credentials ul{ margin:0; padding:0; }
-      .dc-credentials .dc-leaf-dot{ width: 6px; height:6px; border-radius: 50%; background: var(--dc-bright); margin-top: 9px; flex-shrink:0; }
-      .dc-credentials .dc-strong{ font-weight:700; color: var(--dc-deep); }
-      .dc-divider-row{ height:1px; background: var(--dc-line); margin: 14px 0; }
-      .dc-schedule{ display:flex; align-items:center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--dc-deep); }
-      .dc-schedule svg{ width:20px; height:20px; color: var(--dc-bright); }
-      .dc-contact-col{ padding-top: 30px; display:flex; flex-direction:column; gap: 14px; }
-      .dc-contact-row{ display:flex; align-items:center; gap: 12px; text-decoration:none; }
-      .dc-contact-row.dc-tel{ cursor:pointer; }
-      .dc-contact-row.dc-tel:hover .dc-contact-icon{ background: var(--dc-bright); }
-      .dc-contact-row.dc-tel:hover .dc-contact-icon svg{ color:#fff; }
-      .dc-contact-row.dc-tel:hover .dc-phone{ color: var(--dc-bright); width: 120px;}
-      .dc-contact-icon{
-        width: 38px; height: 38px; border-radius: 50%;
-        background: var(--dc-mint);
-        display:flex; align-items:center; justify-content:center; flex-shrink: 0;
-        transition: background 0.15s ease;
-      }
-      .dc-contact-icon svg{ width:18px; height:18px; color: var(--dc-deep); transition: color 0.15s ease; }
-      .dc-contact-row .dc-phone{
-        font-family:'Space Grotesk', sans-serif; font-size: 21px; font-weight: 700;
-        color: var(--dc-deep); letter-spacing: 0.01em; transition: color 0.15s ease;
-      }
-      .dc-contact-row .dc-txt{ font-size: 14px; font-weight: 600; color: #274436; }
-      .dc-foot-strip{
-        position: relative; z-index: 2;
-        border-top: 1px dashed var(--dc-line);
-        padding: 14px 44px;
-        display:flex; justify-content: space-between;
-        font-size: 11px; color: #5C7A6B; font-weight: 500; letter-spacing: 0.02em;
-      }
-      @media (max-width: 760px){
-        .dc-bottom{ grid-template-columns: 1fr; }
-        .dc-cred-col, .dc-contact-col{ padding-top: 10px; }
-        .dc-foot-strip{ flex-direction:column; gap:4px; }
-      }
-
-      /* ===== Doctors section (moved from doctor.html) ===== */
-        /* Filter sidebar — doctors page only */
-        .doctors-page-layout {
-            display: flex;
-            align-items: flex-start;
-            gap: 28px;
-        }
-
-        .filter-sidebar {
-            flex: 0 0 240px;
-            position: sticky;
-            top: 90px;
-            background: #fff;
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 14px;
-            padding: 18px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-        }
-
-        .filter-sidebar-head {
-            font-family: 'Noto Serif Bengali', serif;
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .filter-chevron {
-            width: 16px;
-            height: 16px;
-            flex: 0 0 auto;
-            transition: transform 0.25s ease;
-        }
-
-        .filter-sidebar.collapsed .filter-chevron {
-            transform: rotate(-90deg);
-        }
-
-        .filter-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            overflow: hidden;
-            max-height: 600px;
-            opacity: 1;
-            transition: max-height 0.3s ease, opacity 0.25s ease;
-        }
-
-        .filter-sidebar.collapsed .filter-list {
-            max-height: 0;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .filter-btn {
-            width: 100%;
-            text-align: left;
-            background: transparent;
-            border: none;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            font-size: 0.92rem;
-            color: #333;
-            padding: 9px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-
-        .filter-btn:hover {
-            background: rgba(0,0,0,0.05);
-        }
-
-        .filter-btn.active {
-            background: #1f4b3f;
-            color: #fff;
-        }
-
-        .doctors-list {
-            flex: 1 1 auto;
-            min-width: 0;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 40px 0;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            color: #666;
-        }
-
-        @media (max-width: 860px) {
-            .doctors-page-layout {
-                flex-direction: column;
-            }
-            .filter-sidebar {
-                position: static;
-                width: 100%;
-                flex-basis: auto;
-            }
-            .filter-list {
-                flex-direction: row;
-                flex-wrap: wrap;
-                max-height: 400px;
-            }
-            .filter-btn {
-                width: auto;
-            }
-        }
-
-        /* ===== Doctor cards (same dc- design language as the homepage promo card) ===== */
-        :root{
-            --dc-deep:    #0A3D28;
-            --dc-deep2:   #062A1B;
-            --dc-leaf:    #157A47;
-            --dc-bright:  #33B36B;
-            --dc-mint:    #DFF3E6;
-            --dc-cream:   #FBF8EE;
-            --dc-line:    rgba(10,61,40,0.16);
-        }
-        .doctors-list{
-            display:flex;
-            flex-direction:column;
-            gap: 30px;
-            font-family:'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
-        }
-        .dc-wrap{
-            width:100%;
-        }
-        .dc-card{
-            width:100%;
-            background: var(--dc-cream);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 30px 60px -30px rgba(6,42,27,0.35), 0 1px 0 rgba(255,255,255,0.7) inset;
-        }
-        .dc-card::before{
-            content:"";
-            position:absolute; inset:0;
-            background-image: radial-gradient(rgba(10,61,40,0.06) 1px, transparent 1px);
-            background-size: 16px 16px;
-            pointer-events:none;
-            z-index: 0;
-        }
-        .dc-panel{
-            position: relative;
-            z-index: 1;
-            border-radius: 20px 20px 0 0;
-            background: linear-gradient(160deg, #188A50 0%, var(--dc-deep) 52%, var(--dc-deep2) 100%);
-            overflow: hidden;
-        }
-        .dc-panel::after{
-            content:"";
-            position:absolute; inset:0;
-            background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 4px);
-            mix-blend-mode: overlay;
-            pointer-events:none;
-        }
-        .dc-panel-content{
-            position: relative; z-index: 2;
-            display:grid;
-            grid-template-columns: 1.3fr 0.7fr;
-            grid-template-areas: "text medal";
-            align-items:center;
-            gap: clamp(18px, 4vw, 34px);
-            padding: clamp(24px, 4vw, 36px) clamp(20px, 5vw, 40px) clamp(26px, 5vw, 36px);
-            color: var(--dc-cream);
-        }
-        .dc-panel-left{ grid-area: text; min-width: 0; text-align: left;}
-        .dc-medallion-col{ grid-area: medal; position: relative; display:flex; justify-content:center; }
-        .dc-panel .dc-headline{
-            font-family: 'Noto Serif Bengali', serif;
-            font-size: clamp(18px, 2.6vw, 25px);
-            line-height: 1.4;
-            margin: 0 0 clamp(6px, 1.2vw, 10px) 0;
-            color: #fff;
-        }
-        .dc-subline{
-            font-size: clamp(12.5px, 1.5vw, 15px);
-            font-weight: 500; color: #C9EFD8;
-            margin: 0 0 clamp(12px, 2vw, 16px) 0;
-        }
-        .dc-pill{
-            display:inline-flex; align-items:center; gap: 8px; flex-wrap: wrap;
-            font-size: clamp(11.5px, 1.4vw, 13.5px); font-weight: 600;
-            background: rgba(255,255,255,0.10);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 7px clamp(12px, 2vw, 16px);
-            border-radius: 999px;
-            margin-bottom: clamp(14px, 2.5vw, 20px);
-            max-width: 100%;
-        }
-        .dc-pill svg{ width:14px; height:14px; flex-shrink:0; }
-        .dc-services{ display:flex; gap: clamp(12px, 3vw, 24px); flex-wrap: wrap; }
-        .dc-service{ display:flex; flex-direction:column; align-items:center; gap: 5px; }
-        .dc-service .dc-ring{
-            width: clamp(34px, 7vw, 42px); height: clamp(34px, 7vw, 42px); border-radius: 50%;
-            background: rgba(255,255,255,0.09);
-            border: 1px solid rgba(255,255,255,0.32);
-            display:flex; align-items:center; justify-content:center;
-        }
-        .dc-service svg{ width: clamp(14px, 3vw, 18px); height: clamp(14px, 3vw, 18px); }
-        .dc-service span{ font-size: 10.5px; font-weight: 600; color: #DFF5E6; text-align:center; }
-        .dc-medallion{
-            width: clamp(110px, 20vw, 168px);
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: linear-gradient(160deg,#EFF8F1,#DCEEE1);
-            border: 4px solid var(--dc-cream);
-            box-shadow: 0 0 0 3px var(--dc-bright), 0 14px 30px -12px rgba(0,0,0,0.5);
-            overflow: hidden; position: relative; z-index: 4;
-            display:flex; align-items:center; justify-content:center;
-
-        }
-        .dc-mono{
-            font-family:'Noto Serif Bengali', serif;
-            font-size: clamp(36px, 7.5vw, 62px);
-            font-weight: 700;
-            color: var(--dc-deep);
-        }
-        .dc-medallion img{
-            width:100%; height:100%;
-            object-fit: cover;
-            object-position: center 15%;
-            display:block;
-        }
-        @media (max-width: 640px){
-            .dc-panel-content{
-                grid-template-columns: 1fr;
-                grid-template-areas: "medal" "text";
-                text-align: center;
-            }
-            .dc-panel-left{ display:flex; flex-direction:column; align-items:center; }
-            .dc-pill{ justify-content:center; }
-            .dc-services{ justify-content:center; }
-            .dc-medallion-col{ margin-top: clamp(14px, 4vw, 22px); }
-        }
-        .dc-bottom{
-            position: relative; z-index: 2;
-            padding: 10px clamp(20px, 4vw, 40px) 28px;
-            display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px;
-        }
-        .dc-name-block{ text-align: center; margin-top: -6px; }
-        .dc-name-block .dc-name{ font-family:'Noto Serif Bengali', serif; font-size: 19px; color: var(--dc-deep); margin: 0; }
-        .dc-name-block .dc-desig{ font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; color: var(--dc-bright); text-transform: uppercase; margin-top: 2px; }
-        .dc-cred-col{ padding-top: 26px; text-align: left;}
-        .dc-credentials{ font-size: 13.5px; line-height: 1.9; color: #274436; }
-        .dc-credentials li{ list-style: none; display:flex; align-items:flex-start; gap: 8px; }
-        .dc-credentials ul{ margin:0; padding:0; }
-        .dc-credentials .dc-leaf-dot{ width: 6px; height:6px; border-radius: 50%; background: var(--dc-bright); margin-top: 8px; flex-shrink:0;}
-        .dc-divider-row{ height:1px; background: var(--dc-line); margin: 12px 0; }
-        .dc-schedule{ display:flex; align-items:flex-start; gap: 10px; font-size: 13.5px; font-weight: 600; color: var(--dc-deep); }
-        .dc-schedule svg{ width:18px; height:18px; color: var(--dc-bright); flex-shrink:0; margin-top:1px; }
-        .dc-contact-col{ padding-top: 26px; display:flex; flex-direction:column; gap: 12px; }
-        .dc-contact-row{ display:flex; align-items:center; gap: 10px; text-decoration:none; }
-        .dc-contact-row.dc-tel{ cursor:pointer; }
-        .dc-contact-row.dc-tel:hover .dc-contact-icon{ background: var(--dc-bright); }
-        .dc-contact-row.dc-tel:hover .dc-contact-icon svg{ color:#fff; }
-        .dc-contact-row.dc-tel:hover .dc-phone{ color: var(--dc-bright); }
-        .dc-contact-icon{
-            width: 34px; height: 34px; border-radius: 50%;
-            background: var(--dc-mint);
-            display:flex; align-items:center; justify-content:center; flex-shrink: 0;
-            transition: background 0.15s ease;
-        }
-        .dc-contact-icon svg{ width:16px; height:16px; color: var(--dc-deep); transition: color 0.15s ease; }
-        .dc-contact-row .dc-phone{
-            font-family:'Space Grotesk', 'Hind Siliguri', sans-serif; font-size: clamp(14px, 2.3vw, 18px); font-weight: 700;
-            color: var(--dc-deep); letter-spacing: 0.01em; transition: color 0.15s ease;
-            white-space: nowrap;
-        }
-        .dc-contact-row .dc-txt{ font-size: 13.5px; font-weight: 600; color: #274436; }
-        @media (max-width: 760px){
-            .dc-bottom{ grid-template-columns: 1fr; }
-            .dc-cred-col, .dc-contact-col{ padding-top: 8px; }
-        }
-    </style>
 </head>
 <body class="body">
 
     <nav class="nav">
         <a href="index.html" class="brand">
-            <span class="brand-mark" aria-hidden="true">
-                <img src="logo_-removebg-preview.png" alt="">
-            </span>
             <span>
-                <span class="brand-name" data-edit-id="brand-name">প্রযুক্তি হসপিটাল</span>
-                <span class="brand-tag" data-edit-id="brand-tag">প্রযুক্তি হসপিটাল এন্ড ল্যাব সেন্টার</span>
+                <span class="brand-name" data-edit="site.brandName">Dr. Robiul Islam (Rony)</span>
+                <span class="brand-tag" data-edit="site.brandTag">ENT & Head-Neck Surgeon</span>
             </span>
         </a>
 
         <div class="nav-links-desktop">
             <a href="index.html" class="active">Home</a>
+            <a href="timeline.html">Timeline</a>
             <a href="contact.html">Contact</a>
         </div>
 
-        <a class="nav-call" href="tel:01845854561"><span data-edit-id="nav-call-label">সিরিয়াল করুন</span></a>
+        <a class="nav-call" href="tel:01710258974">Book Appointment</a>
 
         <div class="sidebar-toggle" id="sidebarToggle">☰</div>
     </nav>
 
     <nav class="nav-list" id="sidebar">
         <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="contact.html">Contact</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="contact.html" class="">Contact</a></li>
     </nav>
     <div class="overlay" id="overlay"></div>
 
@@ -541,1210 +42,168 @@
 
         <!-- HERO -->
         <section class="hero">
-            <svg class="pulse-line" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
-                <path class="pulse-path" d="M0,100 L220,100 L255,40 L285,160 L315,20 L345,150 L375,100 L520,100 L555,70 L585,130 L615,100 L1200,100" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle class="pulse-dot" r="5" fill="currentColor">
-                    <animateMotion dur="4s" repeatCount="indefinite" path="M0,100 L220,100 L255,40 L285,160 L315,20 L345,150 L375,100 L520,100 L555,70 L585,130 L615,100 L1200,100"/>
-                </circle>
-            </svg>
-            <div class="hero-bg"></div>
+
             <div class="hero-text">
-                <span class="hero-eyebrow"><span class="dot"></span><span data-edit-id="hero-eyebrow">প্রযুক্তি হাসপাতাল ও ডায়াগনস্টিক সেন্টার</span></span>
-                <h1 data-edit-id="hero-title">আপনার হাসিমুখ আমাদের কাম্য</h1>
+                <span class="hero-badge">
+                    <span class="stars">★★★★★</span>
+                    <span class="badge-text" data-edit="hero.ratingBadge">5.0 Rating — 25 Google Reviews</span>
+                </span>
+                <span class="hero-eyebrow" data-edit="hero.eyebrow">Sherpur's Experienced ENT Specialist</span>
+                <h1 data-edit="hero.title">Precise Care for Your Wellbeing</h1>
                 <div class="hero-rule"></div>
-                <p class="hero-sub" data-edit-id="hero-sub">বিশেষজ্ঞ ডাক্তারগণের তত্বাবধানে প্রতিদিন সকল প্রকার প্যাথলজিক্যাল টেস্ট, আল্ট্রা সাউন্ড,ইসিজি, এক্স- রে সহ সকল রিপোর্ট উন্নত
-                     ও আধুনিক যন্ত্রপাতি র সাহায্যে প্রদান করা হয়। আমারা ২৪ ঘন্টা নরমাল ডেলিভারি ও মাতৃসেবা প্রদান করে থাকি।</p>
+                <p class="hero-role" data-edit="hero.role">Dr. Md. Robiul Islam (Rony) — MBBS, DLO (ENT, BSMMU), Assistant Professor, Department of ENT & Head-Neck Surgery, Kumudini Women's Medical College & Hospital</p>
+                <p class="hero-sub" data-edit="hero.sub">Nearly 10 years of experience — specializing in head-neck cancer surgery, micro-ear surgery, facial cosmetic surgery, and sleep apnea surgery.</p>
                 <div class="hero-actions">
-                    <a class="btn-primary" href="tel:01845854561"><span data-edit-id="hero-cta1">সিরিয়ালের জন্য কল করুন</span></a>
-                    <a class="btn-ghost" href="#schedule"><span data-edit-id="hero-cta2">সময়সূচী দেখুন</span></a>
+                    <a class="btn-primary" href="tel:01710258974" data-edit="hero.ctaPrimary">Call to Book Appointment</a>
+                    <a class="btn-ghost" href="#services" data-edit="hero.ctaSecondary">View Services</a>
                 </div>
             </div>
 
-            <!-- Doctor promo card -->
-            <div class="dc-wrap">
-                <div class="dc-card">
-            </section>
-
-        <!-- TRUST STATS -->
-        <section class="stats-band">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-num" data-edit-id="stat1-num">৮+</span>
-                    <span class="stat-label" data-edit-id="stat1-label">বছরের সেবার অভিজ্ঞতা</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-num" data-edit-id="stat2-num">প্রতিদিন</span>
-                    <span class="stat-label" data-edit-id="stat2-label">নরমাল ডেলিভারি সেবা</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-num" data-edit-id="stat3-num">প্রতিদিন</span>
-                    <span class="stat-label" data-edit-id="stat3-label">সকাল ১০ - রাত ৮ টা পর্যন্ত আল্ট্রসনোগ্রাফি সেবা</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-num" data-edit-id="stat4-num">১৪</span>
-                    <span class="stat-label" data-edit-id="stat4-label">জন বিশেষজ্ঞ</span>
-                </div>
+            <div class="hero-portrait">
+                <img src="doctor.png" alt="Dr. Md. Robiul Islam (Rony)">
             </div>
         </section>
 
-        <!-- DOCTORS (moved from doctor.html) -->
-        <section class="section" id="doctors">
+        <!-- QUALIFICATIONS -->
+        <section class="section quals">
+            <div class="qual-grid" id="qualGrid"></div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="section" id="services">
             <div class="section-head">
-                <span class="section-eyebrow" data-edit-id="doctors-eyebrow">Meet your doctors</span>
-                <h2 data-edit-id="doctors-title">আমাদের বিশেষজ্ঞ ডাক্তারগণ</h2>
+                <span class="section-eyebrow" data-edit="servicesSection.eyebrow">Services</span>
+                <h2 data-edit="servicesSection.heading">Our Services</h2>
             </div>
-
-            <div class="doctors-page-layout">
-
-                <aside class="filter-sidebar" id="filterSidebar">
-                    <div class="filter-sidebar-head" id="filterSidebarHead">
-                        <span data-edit-id="filter-head">বিভাগ অনুযায়ী খুঁজুন</span>
-                        <svg class="filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <ul class="filter-list" id="filterList">
-                        <li><button class="filter-btn active" data-filter="all" data-edit-id="filter-all">সকল ডাক্তার</button></li>
-                        <li><button class="filter-btn" data-filter="medicine" data-edit-id="filter-medicine">মেডিসিন বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="cardiology" data-edit-id="filter-cardiology">কার্ডিওলজি বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="orthopedics" data-edit-id="filter-orthopedics">অর্থোপেডিক্স বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="ent" data-edit-id="filter-ent">নাক-কান-গলা বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="dermatology" data-edit-id="filter-dermatology">চর্ম ও যৌনরোগ বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="psychiatry" data-edit-id="filter-psychiatry">মানসিক ও মনোরোগ বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="urology" data-edit-id="filter-urology">ইউরোলজি বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="surgery" data-edit-id="filter-surgery">সার্জারী বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="neurology" data-edit-id="filter-neurology">নিউরোলজি বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="gynecology" data-edit-id="filter-gynecology">গাইনী ও প্রসূতি বিশেষজ্ঞ</button></li>
-                        <li><button class="filter-btn" data-filter="gastro" data-edit-id="filter-gastro">গ্যাস্ট্রোলিভার বিশেষজ্ঞ</button></li>
-                    </ul>
-                </aside>
-
-            <div class="doctors-list" id="doctorsList">
-                <div class="dc-wrap doctor-card" data-category="ent">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc1-headline">নাক, কান, গলা রোগ বিশেষজ্ঞ ও হেড-নেক সার্জন</h3>
-                                    <p class="dc-subline" data-edit-id="doc1-subline">কুমুদিনী উইমেন্স মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc1-pill">সহকারী অধ্যাপক, ইএনটি বিভাগ</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc1-service1">কান</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc1-service2">নাক</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc1-service3">গলা</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><img src="doctors/rony.png" alt="সহকারী অধ্যাপক ডাঃ মোঃ রবিউল ইসলাম (রনি)"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc1-cred1">এমবিবিএস, ডি.এল.ও (ইএনটি, বিএসএমএমইউ)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc1-cred2">সহকারী অধ্যাপক — কুমুদিনী উইমেন্স মেডিকেল কলেজ ও হাসপাতাল</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc1-cred3">এক্স-সহকারী অধ্যাপক — খাজা ইউনুস আলী মেডিকেল কলেজ ও হাসপাতাল</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc1-cred4">ফেসিয়াল কসমেটিক ও স্লিপ এপনিয়া সার্জারীতে বিশেষ প্রশিক্ষণপ্রাপ্ত</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc1-cred5">বিএমডিসি রেজিঃ এ- ৬৭৬৪৬</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc1-schedule">প্রতি সোমবার বিকাল ৪টা – রাত ৮টা এবং বুধ, বৃহস্পতি ও শুক্রবার দুপুর ২টা – রাত ৮টা পর্যন্ত</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc1-name">সহকারী অধ্যাপক ডাঃ মোঃ রবিউল ইসলাম (রনি)</p>
-                                    <p class="dc-desig" data-edit-id="doc1-desig">ইএনটি ও থাইরয়েড সার্জন</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc1-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc1-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc1-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="dermatology">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc2-headline">চর্ম ও যৌনরোগ, এলার্জি রোগ বিশেষজ্ঞ ও লেজার কসমেটিক ডার্মাটোসার্জন</h3>
-                                    <p class="dc-subline" data-edit-id="doc2-subline">বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয়</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc2-pill">ডিডিভি (চর্ম ও যৌন)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc2-service1">ত্বক</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc2-service2">চুল</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc2-service3">এলার্জি</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><img src="doctors/tofazzal.png" alt="ডাঃ মোঃ তোফাজ্জল হোসেন"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc2-cred1">এমবিবিএস (এমএমসি), ডিডিভি (চর্ম ও যৌন)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc2-cred2">বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয় এন্ড পিজি হাসপাতাল</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc2-cred3">এক্স-বহিঃবিভাগ প্রধান — জলছত্র হাসপাতাল, মধুপুর, টাঙ্গাইল</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc2-cred4">কনসালটেন্ট ডার্মাটোলজিস্ট — দি লেজার স্কিন কেয়ার, এপেক্স হাসপাতাল, ময়মনসিংহ</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc2-cred5">বিএমডিসি রেজিঃ নং - এ ৩৩৪৯৩</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc2-schedule">প্রতি রবিবার ও বুধবার সকাল ১১টা থেকে বিকাল ৪টা পর্যন্ত</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc2-name">ডাঃ মোঃ তোফাজ্জল হোসেন</p>
-                                    <p class="dc-desig" data-edit-id="doc2-desig">ডার্মাটোলজি ও সেক্সুয়াল মেডিসিন বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc2-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc2-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc2-address">জেলা হাসপাতাল রোড, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="medicine">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc3-headline">মেডিসিন বিশেষজ্ঞ</h3>
-                                    <p class="dc-subline" data-edit-id="doc3-subline">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc3-pill">এফসিপিএস (মেডিসিন), এমআরসিপি</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc3-service1">জ্বর</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc3-service2">সংক্রমণ</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc3-service3">দীর্ঘমেয়াদী রোগ</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><img src="doctors/yayid.png" alt="ডাঃ যায়িদ মোঃ আদনান শামীম"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc3-cred1">এমবিবিএস, বিসিএস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc3-cred2">এমসিপিএস (মেডিসিন)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc3-cred3">এফসিপিএস (মেডিসিন), এফপি</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc3-cred4">এমআরসিপি (PACES)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc3-cred5">মেডিসিন বিভাগ — ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc3-schedule">প্রতিদিন বিকাল ৩টা থেকে... (বৃহস্পতিবার বন্ধ)</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc3-name">ডাঃ যায়িদ মোঃ আদনান শামীম</p>
-                                    <p class="dc-desig" data-edit-id="doc3-desig">মেডিসিন বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc3-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc3-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc3-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="orthopedics">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc4-headline">হাড়-জোড়া, বাত ব্যথা, মেরুদণ্ড ও পঙ্গুরোগ বিশেষজ্ঞ ও ট্রমা সার্জন</h3>
-                                    <p class="dc-subline" data-edit-id="doc4-subline">জামালপুর মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc4-pill">ডি-অর্থো (অর্থোপেডিক্স সার্জারী)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc4-service1">হাড়</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc4-service2">জোড়া</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc4-service3">মেরুদণ্ড</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><span class="dc-mono">ম</span></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc4-cred1">এমবিবিএস, বিসিএস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc4-cred2">ডি-অর্থো (অর্থোপেডিক্স সার্জারী)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc4-cred3">এফসিপিএস (অর্থো সার্জারী), এফপি</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc4-cred4">জাতীয় অর্থোপেডিক্স হাসপাতাল ও পুনর্বাসন প্রতিষ্ঠান (পঙ্গু হাসপাতাল), ঢাকা</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc4-cred5">এ ও বেসিক (ইন্দোনেশিয়া), ইলিজারভ ডিফরমেটি কারেকশন (ইন্ডিয়া) — উচ্চতর প্রশিক্ষণপ্রাপ্ত</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc4-schedule">প্রতি রবিবার বিকাল ৫টা থেকে এবং প্রতি শুক্রবার সকাল ১১টা থেকে</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc4-name">ডাঃ মোঃ মনিরুজ্জামান মনির</p>
-                                    <p class="dc-desig" data-edit-id="doc4-desig">অর্থোপেডিক্স বিশেষজ্ঞ ও ট্রমা সার্জন</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc4-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc4-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc4-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="cardiology">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc5-headline">মেডিসিন, বাত জ্বর, উচ্চরক্তচাপ ও হৃদরোগ বিশেষজ্ঞ</h3>
-                                    <p class="dc-subline" data-edit-id="doc5-subline">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc5-pill">ডি-কার্ড (কার্ডিওলজি)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc5-service1">হৃদরোগ</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc5-service2">উচ্চরক্তচাপ</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc5-service3">ডায়াবেটিস</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><span class="dc-mono">মো</span></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc5-cred1">এমবিবিএস, বিসিএস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc5-cred2">ডি-কার্ড (কার্ডিওলজি)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc5-cred3">এফসিপিএস (কার্ডিওলজি), এফপি</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc5-cred4">সিসিডি (ডায়াবেটিস) বারডেম, এমএসপি (আমেরিকা)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc5-cred5">কনসালটেন্ট — ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc5-schedule">প্রতি বৃহস্পতিবার বিকাল ৩টা থেকে</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc5-name">ডাঃ মোশতাক আহমেদ মোড়ল</p>
-                                    <p class="dc-desig" data-edit-id="doc5-desig">কার্ডিওলজি বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc5-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc5-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc5-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="psychiatry">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc6-headline">মানসিক, মাদকাসক্ত ও মনোরোগ বিশেষজ্ঞ</h3>
-                                    <p class="dc-subline" data-edit-id="doc6-subline">২৫০ শয্যা জেনারেল হাসপাতাল, শেরপুর</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc6-pill">এম.ডি (Psychiatry), বিএসএমএমইউ</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc6-service1">দুশ্চিন্তা</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc6-service2">অনিদ্রা</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc6-service3">নেশা</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><img src="doctors/biddyut.png" alt="ডাঃ মোঃ মোফাজ্জল হোসেন বিদ্যুৎ"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc6-cred1">এম.বি.বি.এস, বি.সি.এস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc6-cred2">এমসিপিএস (মনোরোগ)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc6-cred3">এম.ডি (রেসিডেন্ট Psychiatry) — বিএসএমএমইউ, এফসিপিএস (ফাইনাল পার্ট)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc6-cred4">পি.জি.টি (মেডিসিন), সিসিডি (বারডেম)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc6-cred5">২৫০ শয্যা জেনারেল হাসপাতাল, শেরপুর</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc6-schedule">প্রতি শুক্রবার সকাল ১১টা থেকে বিকাল ৪টা পর্যন্ত</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc6-name">ডাঃ মোঃ মোফাজ্জল হোসেন বিদ্যুৎ</p>
-                                    <p class="dc-desig" data-edit-id="doc6-desig">মানসিক ও মনোরোগ বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc6-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc6-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc6-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="orthopedics">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc7-headline">হাড়-জোড়া, বাত-ব্যথা, মেরুদণ্ড রোগ বিশেষজ্ঞ ও ট্রমা সার্জন</h3>
-                                    <p class="dc-subline" data-edit-id="doc7-subline">জামালপুর সদর হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc7-pill">ডি-অর্থো (অর্থোপেডিক্স)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc7-service1">হাড়</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc7-service2">জোড়া</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc7-service3">মেরুদণ্ড</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><img src="doctors/maein.png" alt="ডাঃ মোঃ মাঈন উদ্দিন আকন্দ"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc7-cred1">এমবিবিএস, বিসিএস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc7-cred2">ডি-অর্থো (অর্থোপেডিক্স)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc7-cred3">বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয়</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc7-cred4">অর্থোপেডিক্স ও ট্রমা বিভাগ — জামালপুর সদর হাসপাতাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc7-schedule">প্রতি মঙ্গলবার বিকাল ৪টা থেকে রাত ৮টা পর্যন্ত</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc7-name">ডাঃ মোঃ মাঈন উদ্দিন আকন্দ</p>
-                                    <p class="dc-desig" data-edit-id="doc7-desig">অর্থোপেডিক্স বিশেষজ্ঞ ও সার্জন</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc7-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc7-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc7-address">জেলা হাসপাতাল রোড, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="urology">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc8-headline">ইউরোলজি এন্ড এন্ড্রোলজি বিশেষজ্ঞ ও সার্জন</h3>
-                                    <p class="dc-subline" data-edit-id="doc8-subline">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc8-pill">এমএস (ইউরোলজি এন্ড এন্ড্রোলজি)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc8-service1">কিডনি</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc8-service2">মূত্রনালি</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc8-service3">পুরুষাঙ্গরোগ</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><span class="dc-mono">ম</span></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc8-cred1">কিডনি, মূত্রনালি, মূত্রথলি, অন্ডকোষ, পুরুষাঙ্গরোগ ও যৌনরোগ বিশেষজ্ঞ</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc8-cred2">এমবিবিএস, বিসিএস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc8-cred3">এমএস (ইউরোলজি এন্ড এন্ড্রোলজি)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc8-cred4">এফসিপিএস, এফপি (সার্জারী)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc8-cred5">বিএমডিসি রেজিঃ নং - এ- ৭৩৯২০</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc8-schedule">প্রতি বৃহস্পতিবার বিকাল ৩টা থেকে</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc8-name">ডাঃ মোঃ মাজেদুর রহমান মাজেদ</p>
-                                    <p class="dc-desig" data-edit-id="doc8-desig">ইউরোলজি ও এন্ড্রোলজি বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc8-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc8-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc8-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="surgery">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc9-headline">সার্জারী বিশেষজ্ঞ ও জেনারেল সার্জন</h3>
-                                    <p class="dc-subline" data-edit-id="doc9-subline">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc9-pill">এম.এস (জেনারেল সার্জারী)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc9-service1">জেনারেল সার্জারী</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc9-service2">হার্নিয়া</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc9-service3">অ্যাপেন্ডিক্স</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><img src="doctors/tuhin.png" alt="ডাঃ মোঃ আকলেছুর রহমান খান তুহিন"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc9-cred1">এমবিবিএস, বিসিএস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc9-cred2">এম.এস (জেনারেল সার্জারী)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc9-cred3">রেজিস্ট্রার, সার্জারী বিভাগ</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc9-cred4">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc9-schedule">প্রতিদিন (শনিবার বন্ধ) বিকাল ৩টা – রাত ৯টা পর্যন্ত</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc9-name">ডাঃ মোঃ আকলেছুর রহমান খান তুহিন</p>
-                                    <p class="dc-desig" data-edit-id="doc9-desig">সার্জারী বিশেষজ্ঞ ও জেনারেল সার্জন</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc9-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc9-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc9-address">জেলা হাসপাতাল রোড, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="neurology">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc10-headline">নিউরোমেডিসিন (স্নায়ুরোগ) ও ডায়াবেটিস বিশেষজ্ঞ</h3>
-                                    <p class="dc-subline" data-edit-id="doc10-subline">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc10-pill">এম.ডি (নিউরোলজি) রেসিডেন্ট</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc10-service1">মাথা ব্যথা</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc10-service2">স্ট্রোক</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc10-service3">ডায়াবেটিস</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><img src="doctors/rajon.png" alt="ডাঃ মোঃ রাজন খান"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc10-cred1">এমবিবিএস, সিসিডি (ডায়াবেটিস) বারডেম</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc10-cred2">এফ.সি.পি.এস, এফপি (মেডিসিন)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc10-cred3">এম.ডি (নিউরোলজি) রেসিডেন্ট</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc10-cred4">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc10-schedule">প্রতি সোমবার বিকাল ৩টা থেকে রাত ৮টা পর্যন্ত</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc10-name">ডাঃ মোঃ রাজন খান</p>
-                                    <p class="dc-desig" data-edit-id="doc10-desig">নিউরোমেডিসিন ও ডায়াবেটিস বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc10-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc10-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc10-address">জেলা হাসপাতাল রোড, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="neurology">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc11-headline">নিউরোলজি ও মেডিসিন বিশেষজ্ঞ</h3>
-                                    <p class="dc-subline" data-edit-id="doc11-subline">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc11-pill">এম.ডি (নিউরোলজি)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc11-service1">স্নায়ুরোগ</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc11-service2">মাথাব্যথা</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc11-service3">ডায়াবেটিস</span>
-                            </div>
-                                    </div>
-                                </div>
-                                    <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><span class="dc-mono">ফ</span></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc11-cred1">এমবিবিএস, বিসিএস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc11-cred2">এম.ডি (নিউরোলজি)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc11-cred3">এফসিপিএস, এফপি (মেডিসিন)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc11-cred4">সিসিডি (ডায়াবেটিস) বারডেম</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc11-cred5">রেজিস্ট্রার (নিউরোলজি) — ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc11-schedule">প্রতি শুক্রবার বিকাল ৩টা থেকে</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc11-name">ডাঃ মোঃ ফয়েজ আহমেদ</p>
-                                    <p class="dc-desig" data-edit-id="doc11-desig">নিউরোলজি বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc11-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc11-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc11-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="gynecology">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc12-headline">গাইনী ও প্রসূতি বিশেষজ্ঞ ও সার্জন</h3>
-                                    <p class="dc-subline" data-edit-id="doc12-subline">বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয় এন্ড পিজি হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc12-pill">এফসিপিএস, এফপি (গাইনি ও প্রসূতি)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc12-service1">গর্ভকালীন সেবা</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc12-service2">গাইনি সার্জারী</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc12-service3">ডেলিভারি সেবা</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><span class="dc-mono">স</span></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc12-cred1">এমবিবিএস (ঢাকা)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc12-cred2">ডিজিও (গাইনি এন্ড অবস)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc12-cred3">এফসিপিএস, এফপি (গাইনি ও প্রসূতি)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc12-cred4">বাংলাদেশ মেডিকেল বিশ্ববিদ্যালয় এন্ড পিজি হাসপাতাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc12-schedule">প্রতিদিন বিকাল ৩টা থেকে</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc12-name">ডাঃ সিরাজুন নাহার রাবেয়া</p>
-                                    <p class="dc-desig" data-edit-id="doc12-desig">গাইনী ও প্রসূতি বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc12-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc12-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc12-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="neurology">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc13-headline">মেডিসিন ও নিউরোমেডিসিন বিশেষজ্ঞ</h3>
-                                    <p class="dc-subline" data-edit-id="doc13-subline">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc13-pill">এম.ডি (নিউরোলজি)</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc13-service1">স্ট্রোক</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc13-service2">মাইগ্রেন</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc13-service3">খিঁচুনি</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><span class="dc-mono">হ</span></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc13-cred1">এমবিবিএস, বিসিএস (স্বাস্থ্য)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc13-cred2">এম.ডি (নিউরোলজি)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc13-cred3">এপিন্ট্যান্ট রেজিস্ট্রার (ফিজিক্যাল মেডিসিন ও রিহ্যাবিলিটেশন)</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc13-cred4">ময়মনসিংহ মেডিকেল কলেজ ও হাসপাতাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc13-schedule">প্রতি বৃহস্পতিবার বিকাল ৩টা থেকে রাত ৮টা পর্যন্ত</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc13-name">ডাঃ হাবিবুল্লাহ সরকার</p>
-                                    <p class="dc-desig" data-edit-id="doc13-desig">মেডিসিন ও নিউরোমেডিসিন বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc13-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc13-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc13-address">জেলা হাসপাতাল রোড, নারায়ণপুর, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dc-wrap doctor-card" data-category="gastro">
-                    <div class="dc-card">
-                        <div class="dc-panel">
-                            <div class="dc-panel-content">
-                                <div class="dc-panel-left">
-                                    <h3 class="dc-headline" data-edit-id="doc14-headline">গ্যাস্ট্রোলিভার বিশেষজ্ঞ</h3>
-                                    <p class="dc-subline" data-edit-id="doc14-subline">প্রযুক্তি হসপিটাল</p>
-                                    <div class="dc-pill">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                                        <span data-edit-id="doc14-pill">লিভার ও পেটের রোগ বিশেষজ্ঞ</span>
-                                    </div>
-                                    <div class="dc-services">
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc14-service1">ফ্যাটি লিভার</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc14-service2">জন্ডিস</span>
-                            </div>
-                            <div class="dc-service">
-                                <div class="dc-ring"><svg viewBox="0 0 24 24" fill="none" stroke="#DFF5E6" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
-                                <span data-edit-id="doc14-service3">পেটের রোগ</span>
-                            </div>
-                                    </div>
-                                </div>
-                                <div class="dc-medallion-col">
-                                    <div class="dc-medallion"><img src="doctors/shojib.png" alt="ডাঃ মোঃ জোবায়ের আহমাদ সজিব (সজিব)"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dc-bottom">
-                            <div class="dc-cred-col">
-                                <div class="dc-divider-row" style="margin-top:0;"></div>
-                                <ul class="dc-credentials">
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc14-cred1">লিভারের যেকোনো সমস্যা, জন্ডিস ও পেটের পুরানো রোগের সঠিক পরামর্শ ও চিকিৎসা প্রদান করা হয়</span></li>
-                                <li><span class="dc-leaf-dot"></span> <span data-edit-id="doc14-cred2">গ্যাস্ট্রোলিভার বিশেষজ্ঞ — প্রযুক্তি হসপিটাল</span></li>
-                                </ul>
-                                <div class="dc-divider-row"></div>
-                                <div class="dc-schedule">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="16" cy="16" r="3.2" stroke-width="1.4"/><path d="M16 14.6v1.6l1 .8" stroke-width="1.4"/></svg>
-                                    <span data-edit-id="doc14-schedule">প্রতি শনিবার বিকাল ৩টা – রাত ৮টা পর্যন্ত</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="dc-name-block">
-                                    <p class="dc-name" data-edit-id="doc14-name">ডাঃ মোঃ জোবায়ের আহমাদ (সজিব)</p>
-                                    <p class="dc-desig" data-edit-id="doc14-desig">গ্যাস্ট্রোলিভার বিশেষজ্ঞ</p>
-                                </div>
-                                <div class="dc-contact-col">
-                                <a class="dc-contact-row dc-tel" href="tel:01751067002"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc14-phone1" data-edit-tel="1">01751-067002</span></a>
-                                <a class="dc-contact-row dc-tel" href="tel:01845854561"><div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2C10 21 3 14 3 6a2 2 0 0 1 2-2z"/></svg></div><span class="dc-phone" data-edit-id="doc14-phone2" data-edit-tel="1">01845-854561</span></a>
-                                    <div class="dc-contact-row">
-                                        <div class="dc-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
-                                        <span class="dc-txt" data-edit-id="doc14-address">জেলা হাসপাতাল রোড, শেরপুর</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <p class="no-results" id="noResults" style="display:none;">এই বিভাগে কোনো ডাক্তার পাওয়া যায়নি।</p>
-
-            </div>
-
-            </div>
+            <div class="service-grid" id="serviceGrid"></div>
         </section>
-
-        <!-- QUALIFICATIONS --
-
-        <!-- WHY CHOOSE US -->
-        <section class="section why">
-            <div class="section-head">
-                <span class="section-eyebrow" data-edit-id="why-eyebrow">Why choose us</span>
-                <h2 data-edit-id="why-title">কেন আমাদের বেছে নেবেন</h2>
-            </div>
-            <div class="why-grid">
-                <div class="why-card">
-                    <div class="why-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.4"/><path d="M13 21l4 4 10-10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 data-edit-id="why1-title">যোগ্যতাসম্পন্ন বিশেষজ্ঞ</h3>
-                    <p data-edit-id="why1-desc">এমবিবিএস ও আল্ট্রাসাউন্ডে বিশেষায়িত প্রশিক্ষণপ্রাপ্ত ডাক্তার দ্বারা প্রতিটি স্ক্যান পরিচালিত হয়।</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><path d="M20 6l3.8 8.2L32 16l-6 6.2L27.6 32 20 27.4 12.4 32 14 22.2 8 16l8.2-1.8L20 6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 data-edit-id="why2-title">আধুনিক যন্ত্রপাতি</h3>
-                    <p data-edit-id="why2-desc">উন্নত প্রযুক্তির আল্ট্রাসাউন্ড ও কালার ডপলার মেশিনে নির্ভুল ফলাফল নিশ্চিত করা হয়।</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><path d="M8 20h6l2.5-7L21 27l3-14 2 7h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 data-edit-id="why3-title"> হরমোন সহ সকল  রিপোর্ট</h3>
-                    <p data-edit-id="why3-desc">পরীক্ষার পরপরই বিস্তারিত ও নির্ভুল রিপোর্ট হাতে পাবেন, কোনো অহেতুক অপেক্ষা ছাড়াই।</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><path d="M20 34s-12-7.2-12-16A7 7 0 0120 13a7 7 0 0112 5c0 8.8-12 16-12 16z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 data-edit-id="why4-title">রোগীবান্ধব পরিবেশ</h3>
-                    <p data-edit-id="why4-desc">প্রতিটি রোগীর সাথে যত্নশীল ও মানবিক আচরণ, যাতে চিকিৎসার অভিজ্ঞতা স্বস্তিদায়ক হয়।</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- DEPARTMENTS / SERVICES -->
-        <section class="section" id="departments">
-            <div class="section-head">
-                <span class="section-eyebrow" data-edit-id="departments-eyebrow">Our departments</span>
-                <h2 data-edit-id="departments-title">আমাদের সেবাসমূহ</h2>
-            </div>
-            <div class="service-grid">
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><path d="M20 6c-6 6-11 12-11 19a11 11 0 0022 0c0-7-5-13-11-19z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 data-edit-id="dept1-title">উদর ও পেলভিক স্ক্যান</h3>
-                    <p class="p-no" data-edit-id="dept1-desc">উদর ও পেলভিক অঞ্চলের বিস্তারিত পরীক্ষা করে দ্রুত ও নির্ভুল রোগ নির্ণয়।</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><path d="M13 12c0-3 3-5 7-5s7 2 7 5-3 4-3 8v3H16v-3c0-4-3-5-3-8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 26h8v3a4 4 0 01-8 0v-3z" stroke="currentColor" stroke-width="1.6"/></svg>
-                    </div>
-                    <h3 data-edit-id="dept2-title">থাইরয়েড স্ক্যান</h3>
-                    <p class="p-no" data-edit-id="dept2-desc">থাইরয়েড গ্রন্থির আকার ও গঠন পরীক্ষা করে দ্রুত সমস্যা শনাক্তকরণ।</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.6"/><circle cx="20" cy="20" r="5" stroke="currentColor" stroke-width="1.6"/></svg>
-                    </div>
-                    <h3 data-edit-id="dept3-title">ফলিকুলার স্টাডি</h3>
-                    <p class="p-no" data-edit-id="dept3-desc">নারীর প্রজনন স্বাস্থ্য পর্যবেক্ষণে নিয়মিত ফলিকুলার স্টাডি ও মনিটরিং সেবা।</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="13" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M8 33c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-                    </div>
-                    <h3 data-edit-id="dept4-title">বিশেষজ্ঞ ডাক্তারগণ</h3>
-                    <p class="p-no" data-edit-id="dept4-desc">বিশেষজ্ঞ ডাক্তারগণ নিয়মিত রোগী দেখছেন।</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><rect x="10" y="8" width="20" height="24" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M15 16h10M15 21h10M15 26h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-                    </div>
-                    <h3 data-edit-id="dept5-title">প্যাথলজি সেবা</h3>
-                    <p class="p-no" data-edit-id="dept5-desc">নির্ভুল ও দ্রুত রিপোর্টসহ পূর্ণাঙ্গ প্যাথলজি সেবা।</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><path d="M20 6c-6 6-11 12-11 19a11 11 0 0022 0c0-7-5-13-11-19z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="20" cy="25" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
-                    </div>
-                    <h3 data-edit-id="dept6-title">রেডিওলজি ও আল্ট্রাসাউন্ড</h3>
-                    <p class="p-no" data-edit-id="dept6-desc">আধুনিক যন্ত্রপাতির মাধ্যমে রেডিওলজি ও আল্ট্রাসাউন্ড সেবা।</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 40 40" fill="none"><path d="M12 20h6l3-7 4 14 3-7h6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
-                    </div>
-                    <h3 data-edit-id="dept7-title">অপারেশন ও ফলো আপ</h3>
-                    <p class="p-no" data-edit-id="dept7-desc">নিরাপদ অপারেশন পরবর্তী নিয়মিত ফলো আপ সেবা প্রদান করা হয়।</p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- DOCTOR PROFILE -->
 
         <!-- SCHEDULE / LOCATION -->
         <section class="schedule-band" id="schedule">
             <div class="schedule-card">
                 <div class="schedule-info">
-                    <span class="section-eyebrow" data-edit-id="schedule-eyebrow">Availability</span>
-                    <h2 data-edit-id="schedule-title">সময়সূচী ও চেম্বার</h2>
-                    <ul class="schedule-time">
-                        <li><span data-edit-id="schedule1-day">সোম – শুক্র</span><span data-edit-id="schedule1-hours">সকাল ৯টা – বিকাল ৫টা</span></li>
-                        <li><span data-edit-id="schedule2-day">শনিবার</span><span data-edit-id="schedule2-hours">দুপুর ১টা – রাত ৮টা</span></li>
-                        <li><span data-edit-id="schedule3-day">রবিবার</span><span data-edit-id="schedule3-hours">সকাল ১০টা – বিকাল ৪টা</span></li>
-                    </ul>
-                    <p class="schedule-loc" data-edit-id="schedule-address">Zilla Hospital Road, Narayanpur, Sherpur</p>
-                    <a class="btn-primary" href="tel:01845854561"><span data-edit-id="schedule-cta">কল করে সিরিয়াল দিন</span></a>
+                    <span class="section-eyebrow" data-edit="scheduleSection.eyebrow">Availability</span>
+                    <h2 data-edit="scheduleSection.heading">Schedule & Chamber</h2>
+                    <p class="schedule-loc" data-edit="scheduleSection.locationLine"> Hospital Road, Sadar, Sherpur-2100</p>
+
+                    <div class="schedule-table" id="scheduleTable">
+                        <div class="schedule-row schedule-row-head">
+                            <span>Day(s)</span>
+                            <span>Time</span>
+                            <span>Location</span>
+                        </div>
+                        <div id="scheduleRows"></div>
+                    </div>
+
+                    <a class="btn-primary" href="tel:01710258974" data-edit="scheduleSection.ctaText">Call to Book Appointment</a>
                 </div>
                 <div class="schedule-photo">
-                    <svg viewBox="0 0 200 200" fill="none" aria-hidden="true">
-                        <circle cx="100" cy="100" r="92" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-                        <circle cx="100" cy="100" r="66" stroke="currentColor" stroke-width="1" opacity="0.5"/>
-                        <path d="M40,100 L74,100 L86,66 L104,132 L118,44 L132,100 L160,100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="IMG-20260707-WA00031.jpg" alt="Dr. Rony's team in the operating room" style="object-position: 75% 30%;">
                 </div>
             </div>
         </section>
 
-        <!-- FINAL CTA -->
-        <section class="cta-band">
-            <h2 data-edit-id="cta-title">আজই সিরিয়াল নিশ্চিত করুন</h2>
-            <p data-edit-id="cta-desc">সরাসরি ডাক্তারের তত্ত্বাবধানে নির্ভুল আল্ট্রাসোনোগ্রাফি সেবার জন্য এখনই কল করুন।</p>
-            <a class="btn-primary" href="tel:01845854561"><span data-edit-id="cta-phone-text" data-edit-tel="1"> 01845-854561</span></a>
+        <section class="section" id="reviews">
+            <div class="section-head">
+                <span class="section-eyebrow">Patient Reviews</span>
+            </div>
+
+            <div class="Reviews-div">
+                <div class="review-card"><img src="review-01.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-02.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-03.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-04.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-05.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-06.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-07.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-08.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-09.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-10.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-11.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-12.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-13.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-14.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-15.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-16.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-17.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-18.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-19.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-20.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-21.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-22.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-23.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+                <div class="review-card"><img src="review-24.png" alt="গুগল রিভিউ স্ক্রিনশট" loading="lazy"></div>
+            </div>
         </section>
 
-        <!-- MAP -->
-        <section class="map-band">
-            <iframe
-                title="Google Maps Location"
-                src="https://maps.google.com/maps?q=Zilla%20Hospital%20Road%2C%20Narayanpur%2C%20Sherpur&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="380"
-                style="border:0; display:block;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </section>
+        <style>
+            .Reviews-div{
+                display:flex;
+                gap:16px;
+                overflow-x:auto;
+                scroll-snap-type:x mandatory;
+                scroll-behavior:smooth;
+                -webkit-overflow-scrolling:touch;
+                padding:6px 4px 22px;
+            }
+            .Reviews-div::-webkit-scrollbar{height:8px;}
+            .Reviews-div::-webkit-scrollbar-track{background:transparent;}
+            .Reviews-div::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.18);border-radius:999px;}
+            .review-card{
+                flex:0 0 auto;
+                scroll-snap-align:start;
+                background:#1f1e1e;
+                border:1px solid rgba(0,0,0,0.08);
+                border-radius:14px;
+                box-shadow:0 4px 18px rgba(0,0,0,0.07);
+                padding:10px;
+                height:230px;
+                display:flex;
+                align-items:center;
+            }
+            .review-card img{
+                height:100%;
+                width:auto;
+                max-width:420px;
+                object-fit:contain;
+                border-radius:8px;
+                display:block;
+            }
+            @media (max-width:600px){
+                .review-card{height:190px;}
+            }
+        </style>
 
         <footer class="footer">
             <div class="supreme">
-                <div class="footer-brand">
-                    <p data-edit-id="footer-tagline">শেরপুরের বিশ্বস্ত আল্ট্রাসাউন্ড ও ডায়াগনস্টিক সেন্টার — নির্ভুল যত্ন, সরাসরি তত্ত্বাবধানে।</p>
-                </div>
-
                 <div class="div-li-z">
-                    <p class="z-p" data-edit-id="footer-quicklinks-label">Quick Links</p>
-                    <a href="index.html"><li class="li-z" data-edit-id="footer-link-home">Home</li></a>
-                    <a href="contact.html"><li class="li-z" data-edit-id="footer-link-contact">Contact</li></a>
+                    <p class="z-p" data-edit="footer.quickLinksLabel">Quick Links</p>
+                    <a href="index.html"><li class="li-z">Home</li></a>
+                    <a href="timeline.html"><li class="li-z">Timeline</li></a>
+                    <a href="contact.html"><li class="li-z">Contact</li></a>
                 </div>
                 <div class="div-li-z1">
-                    <p class="z-p" data-edit-id="footer-contact-label">Contact</p>
-                    <li class="li-z" data-edit-id="footer-phone1" data-edit-tel="1">01845-854561</li>
-                    <li class="li-z" data-edit-id="footer-phone2" data-edit-tel="1">01751-067002</li>
-                    <li class="li-z" data-edit-id="footer-address">Zilla Hospital Road, Narayanpur, Sherpur</li>
+                    <p class="z-p" data-edit="footer.contactLabel">Contact</p>
+                    <li class="li-z" href="tel:01710258974" data-edit="contact.phone"> 01710-258974</li>
+                    <li class="li-z" data-edit="contact.email"> ronykyamc@gmail.com</li>
+                    <li class="li-z" data-edit="contact.address"> Hospital Road, Sadar, Sherpur</li>
+                </div>
+                <div class="div-li-z1">
+                    <p class="z-p" data-edit="footer.followLabel">Follow</p>
+                    <a href="https://www.facebook.com/profile.php?id=100075675588387" target="_blank" rel="noopener"><li class="li-z">Facebook: Dr.Robiul islam Rony</li></a>
+                    <a href="https://www.instagram.com/dr.robiulislamrony/" target="_blank" rel="noopener"><li class="li-z">Instagram: @Dr.Robiul.Islam.Rony</li></a>
+                    <a href="https://drronyent.com" target="_blank" rel="noopener"><li class="li-z">DrRonyENT.com</li></a>
                 </div>
             </div>
         </footer>
 
         <div class="f-div">
-            <p class="f-p" data-edit-id="footer-copyright" data-edit-html="1">© 2026 | <a href="https://www.facebook.com/profile.php?id=61584839668380">Developed by M I</a></p>
+            <p class="f-p" data-edit="footer.copyright">© 2026 | Developed by M I</p>
         </div>
 
     </div>
 
-    <a class="float-call" href="tel:01845854561">📞 <span data-edit-id="floatcall-label">কল করুন</span></a>
-
-    <!-- Firebase (site content editor) -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="content-loader.js"></script>
+    <a class="float-call" href="tel:01710258974">📞 <span>Call Now</span></a>
 
     <script>
         const toggle = document.getElementById("sidebarToggle");
@@ -1764,50 +223,54 @@
             overlay.addEventListener("click", closeSidebar);
             sidebar.querySelectorAll("a").forEach(a => a.addEventListener("click", closeSidebar));
         }
+    </script>
 
-        document.querySelectorAll('.service-card, .why-card').forEach(card => {
-            const wrap = document.createElement('div');
-            wrap.className = 'card-hitbox';
-            card.parentNode.insertBefore(wrap, card);
-            wrap.appendChild(card);
+    <script type="module">
+        import { loadContent, applyTextFields } from "./content.js";
 
-            wrap.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
-            wrap.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
+        function esc(str) {
+            const div = document.createElement("div");
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function renderSchedule(rows) {
+            const wrap = document.getElementById("scheduleRows");
+            wrap.innerHTML = rows.map(r => `
+                <div class="schedule-row">
+                    <span>${esc(r.day)}</span>
+                    <span>${esc(r.time)}</span>
+                    <span>${esc(r.location)}</span>
+                </div>
+            `).join("");
+        }
+
+        function renderQualifications(list) {
+            const wrap = document.getElementById("qualGrid");
+            wrap.innerHTML = list.map(q => `
+                <div class="qual-item">
+                    <span class="qual-dot"></span>
+                    <p>${esc(q)}</p>
+                </div>
+            `).join("");
+        }
+
+        function renderServices(list) {
+            const wrap = document.getElementById("serviceGrid");
+            wrap.innerHTML = list.map(s => `
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>${esc(s)}</h3>
+                </div>
+            `).join("");
+        }
+
+        loadContent().then(content => {
+            applyTextFields(content);
+            renderSchedule(content.schedule);
+            renderQualifications(content.qualifications);
+            renderServices(content.services);
         });
-
-        const filterSidebar = document.getElementById('filterSidebar');
-        const filterSidebarHead = document.getElementById('filterSidebarHead');
-        if (filterSidebar && filterSidebarHead) {
-            filterSidebarHead.addEventListener('click', () => {
-                filterSidebar.classList.toggle('collapsed');
-            });
-        }
-
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const doctorCards = document.querySelectorAll('.doctor-card');
-        const noResults = document.getElementById('noResults');
-
-        if (filterButtons.length) {
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-
-                    const filter = btn.getAttribute('data-filter');
-                    let visibleCount = 0;
-
-                    doctorCards.forEach(card => {
-                        const match = filter === 'all' || card.getAttribute('data-category') === filter;
-                        card.style.display = match ? '' : 'none';
-                        if (match) visibleCount++;
-                    });
-
-                    if (noResults) {
-                        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-                    }
-                });
-            });
-        }
     </script>
 </body>
 </html>
